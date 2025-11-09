@@ -22,7 +22,8 @@ export default [
   // 3) Optionally override or add rules after
   {
     rules: {
-      // custom rules or overrides here
+      // Allow apostrophes and quotes in JSX without escaping
+      "react/no-unescaped-entities": "off",
     },
   },
 ];

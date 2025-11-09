@@ -116,7 +116,7 @@ export default function DigitalTwinPage() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Jan&apos;s Digital Twin
+                  Jan's Digital Twin
                 </h1>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   AI-Powered Assistant
