@@ -63,6 +63,20 @@ export async function initializeDigitalTwin() {
 
 export async function queryDigitalTwin(question: string) {
   try {
+    // Check if database is initialized
+    const info = await index.info();
+    if (!info.vectorCount || info.vectorCount === 0) {
+      // Auto-initialize if empty
+      const initResult = await initializeDigitalTwin();
+      if (!initResult.success) {
+        return {
+          success: false,
+          answer: 'Database not initialized. Please refresh the page.',
+          sources: []
+        };
+      }
+    }
+
     // Step 1: Query vector database for relevant content
     const vectorResults = await index.query({
       data: question,
@@ -119,10 +133,12 @@ Provide a helpful, conversational response as if you were Jan:`
     };
   } catch (error) {
     console.error('Error querying digital twin:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Detailed error:', errorMessage);
     return {
       success: false,
-      answer: 'Sorry, I encountered an error processing your question.',
-      error: error instanceof Error ? error.message : 'Unknown error',
+      answer: `Sorry, I encountered an error: ${errorMessage}. Please make sure environment variables are configured on Vercel.`,
+      error: errorMessage,
       sources: []
     };
   }

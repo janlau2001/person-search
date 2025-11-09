@@ -52,13 +52,13 @@ export function FloatingChatbot() {
       } else {
         setMessages(prev => [...prev, {
           role: 'assistant',
-          content: 'Sorry, I encountered an error. Please try again.'
+          content: result.answer || 'Sorry, I encountered an error. Please try again.'
         }]);
       }
     } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: 'Sorry, something went wrong.'
+        content: 'Sorry, something went wrong. Please check if environment variables are set in Vercel.'
       }]);
     } finally {
       setLoading(false);
