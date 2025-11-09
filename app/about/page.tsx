@@ -1,89 +1,112 @@
-import Link from 'next/link'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Twitter } from 'lucide-react'
-
-function ProjectOverview() {
-  return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle>Project Overview</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="mb-4">
-          Person Search is a demonstration project showcasing the power of Next.js, React, and modern web technologies. 
-          It provides a simple yet effective interface for searching and displaying user information.
-        </p>
-        <p className="mb-4">
-          This project utilizes Next.js 15 with the App Router, React 19, TypeScript, and a variety of 
-          cutting-edge libraries to create a responsive and accessible user experience.
-        </p>
-        <p>
-          Key features include asynchronous search functionality, server-side filtering, 
-          and a dark mode toggle for user comfort.
-        </p>
-      </CardContent>
-    </Card>
-  )
-}
-
-function SocialLinks() {
-  return (
-    <div className="flex flex-wrap gap-4">
-      <Button asChild>
-        <Link href="https://www.linkedin.com/in/callumbir/" target="_blank" rel="noopener noreferrer">
-          <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
-        </Link>
-      </Button>
-      <Button asChild variant="outline">
-        <Link href="https://github.com/gocallum" target="_blank" rel="noopener noreferrer">
-          <Github className="mr-2 h-4 w-4" /> GitHub
-        </Link>
-      </Button>
-      <Button asChild variant="secondary">
-        <Link href="https://x.com/callumbir">
-          <Twitter className="mr-2 h-4 w-4" /> Contact Me
-        </Link>
-      </Button>
-    </div>
-  )
-}
-
-function DeveloperInfo() {
-  return (
-    <Card className="mb-8">
-      <CardHeader>
-        <CardTitle>About the Developer</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="mb-4">
-          Hi, I&apos;m <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">Callum Bir</code>, the developer behind Person Search. I&apos;m passionate about creating 
-          efficient, user-friendly web applications using the latest technologies.
-        </p>
-        <p className="mb-4">
-          This project serves as a demonstration of my skills in Next.js, React, and modern frontend development.
-          I&apos;m always looking to learn and improve, so feel free to reach out with any questions or feedback!
-        </p>
-        <SocialLinks />
-      </CardContent>
-    </Card>
-  )
-}
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from '@/components/ui/badge';
+import { Target, TrendingUp, BookOpen, Sparkles } from 'lucide-react';
+import { FloatingChatbot } from '@/components/floating-chatbot';
+import digitalTwinData from '../../digitaltwin.json';
 
 export default function AboutPage() {
+  const { career_goals, interview_prep } = digitalTwinData;
+
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <main className="flex-grow container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">About Person Search</h1>
-        <ProjectOverview />
-        <DeveloperInfo />
-        <Button asChild variant="link" className="mt-4">
-          <Link href="/">
-            Back to Home
-          </Link>
-        </Button>
-      </main>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div className="container mx-auto px-4 py-12 max-w-4xl">
+        
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">About Me</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400">
+            Learn more about my journey, goals, and what drives me
+          </p>
+        </div>
+
+        {/* Career Goals */}
+        <section className="mb-12">
+          <Card className="bg-white dark:bg-gray-800 shadow-lg">
+            <CardHeader>
+              <CardTitle className="text-3xl flex items-center gap-2">
+                <Target className="h-7 w-7 text-blue-600" />
+                Career Goals
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div>
+                <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5 text-green-600" />
+                  Short-term Goals
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300">{career_goals.short_term}</p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-yellow-600" />
+                  Long-term Vision
+                </h3>
+                <p className="text-gray-700 dark:text-gray-300">{career_goals.long_term}</p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-lg mb-2 flex items-center gap-2">
+                  <BookOpen className="h-5 w-5 text-purple-600" />
+                  Currently Learning
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {career_goals.learning_focus.map((item, idx) => (
+                    <Badge key={idx} variant="secondary">{item}</Badge>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-lg mb-2">Industries of Interest</h3>
+                <div className="flex flex-wrap gap-2">
+                  {career_goals.industries_interested.map((industry, idx) => (
+                    <Badge key={idx} variant="outline">{industry}</Badge>
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Why Hire Me */}
+        <section className="mb-12">
+          <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg">
+            <CardHeader>
+              <CardTitle className="text-3xl">Why Work With Me?</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-lg leading-relaxed mb-6">{interview_prep.why_hire_me}</p>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-semibold text-xl mb-3">Key Strengths</h3>
+                  <ul className="space-y-2">
+                    {interview_prep.strengths.map((strength, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-yellow-300">★</span>
+                        <span>{strength}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-xl mb-3">What Makes Me Unique</h3>
+                  <p className="text-blue-50 mb-4">{interview_prep.unique_value}</p>
+                  <div>
+                    <h4 className="font-semibold mb-2">Passion Projects</h4>
+                    <p className="text-blue-50">{interview_prep.passion_projects}</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+      </div>
+
+      <FloatingChatbot />
     </div>
-  )
+  );
 }
 

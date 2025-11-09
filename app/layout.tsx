@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { DigitalTwinInitializer } from "@/components/digital-twin-initializer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Person Search App",
-  description: "A simple search app to find people by name",
+  title: "Jan Laurence Olarte - Portfolio",
+  description: "Personal portfolio showcasing skills, experience, and projects with an AI-powered digital twin assistant",
 };
 
 export default function RootLayout({
@@ -32,13 +33,13 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
     >          
 
-<ThemeProvider
+      <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-
+        <DigitalTwinInitializer />
         <Navbar />
         <main className="flex-grow">
           {children}
@@ -46,9 +47,7 @@ export default function RootLayout({
         <Toaster />
 
         <Footer />
-        </ThemeProvider>
-
-    </body>
+        </ThemeProvider>    </body>
 
   </html>  );
 }

@@ -2,7 +2,7 @@
 'use client'
 
 import Link from 'next/link';
-import { Search, Moon, Sun } from 'lucide-react';
+import { User, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from "@/components/ui/button";
 
@@ -10,13 +10,13 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <nav className="bg-background shadow-md">
+    <nav className="bg-background shadow-md border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center">
-              <Search className="h-8 w-8 text-primary" aria-hidden="true" />
-              <span className="ml-2 text-lg font-semibold text-foreground">Person Search</span>
+              <User className="h-8 w-8 text-primary" aria-hidden="true" />
+              <span className="ml-2 text-lg font-semibold text-foreground">Jan Laurence Olarte</span>
             </Link>
           </div>
           <div className="flex items-center space-x-4">

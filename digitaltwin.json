@@ -1,0 +1,171 @@
+{
+  "personal": {
+    "name": "Jan Laurence Hernandez Olarte",
+    "title": "Information Technology Student at St. Paul University Philippines",
+    "location": "Philippines",
+    "summary": "24 years of age, pursuing BSIT in St. Paul University Philippines. Friendly, cooperative, fast learning and hardworking",
+    "elevator_pitch": "A friendly IT guy who is passionate about technology and eager to learn and grow in the field.",
+    "favorite_food": "Burger",
+    "favorite_color": "Black",
+    "hobbies": [
+      "Playing guitar",
+      "Chess",
+      "Table tennis",
+      "Cycling"
+    ],
+    "contact": {
+      "email": "janlaurenceolarte@yahoo.com/janlaurenceolarte070101@gmail.com",
+      "linkedin": "https://www.linkedin.com/in/jan-laurence-olarte-664834384/",
+      "github": "https://github.com/janlau2001",
+      "portfolio": "https://yourportfolio.com"
+    }
+  },
+  
+  "education": {
+    "university": "St. Paul University Philippines",
+    "degree": "Bachelor of Science in Information Technology",
+    "graduation_year": "2026 (Expected)",
+    "relevant_coursework": [
+      "Data Structures and Algorithms",
+      "Web Development",
+      "Database Management Systems",
+      "Object-Oriented Programming",
+      "Software Engineering"
+    ]
+  },
+  
+  "experience": [
+    {
+      "company": "Tech Startup - Software Development Internship",
+      "title": "Junior Web Developer Intern",
+      "duration": "June 2024 - Present",
+      "description": "Working as a web development intern, contributing to building responsive web applications and learning industry best practices",
+      "achievements_star": [
+        {
+          "situation": "The team needed to improve the loading speed of the company's main web application which was experiencing slow performance",
+          "task": "Assigned to optimize the frontend code and reduce page load times",
+          "action": "Refactored JavaScript code, implemented lazy loading for images, and optimized CSS delivery",
+          "result": "Reduced page load time by 40% from 5 seconds to 3 seconds, improving user experience significantly"
+        },
+        {
+          "situation": "Company needed a new feature to allow users to filter and search through large datasets",
+          "task": "Develop an efficient search and filter system for the web application",
+          "action": "Implemented a dynamic search algorithm using JavaScript and integrated it with the backend API",
+          "result": "Successfully deployed the feature which is now used by over 500 users daily, reducing search time by 60%"
+        }
+      ],
+      "technical_skills_used": ["HTML", "CSS", "JavaScript", "Laravel", "MySQL", "Git"],
+      "learnings": "Learned professional coding standards, version control best practices, and how to collaborate effectively in a development team"
+    },
+    {
+      "company": "University - Academic Projects",
+      "title": "Student Developer",
+      "duration": "2022 - Present",
+      "description": "Developed various academic projects demonstrating full-stack development skills",
+      "achievements_star": [
+        {
+          "situation": "Final year project required building a complete web application from scratch",
+          "task": "Design and develop a full-stack inventory management system",
+          "action": "Used Laravel for backend, MySQL for database, and HTML/CSS/JavaScript for frontend",
+          "result": "Created a fully functional system that earned highest marks in the class and is being considered for use by local businesses"
+        }
+      ],
+      "technical_skills_used": ["Python", "Java", "HTML", "CSS", "JavaScript", "Laravel", "MySQL"],
+      "learnings": "Gained comprehensive understanding of software development lifecycle and full-stack development"
+    }
+  ],
+  
+  "projects": [
+    {
+      "name": "E-Commerce Web Application",
+      "description": "A full-stack e-commerce platform with shopping cart, payment integration, and admin dashboard",
+      "technologies": ["Laravel", "MySQL", "HTML", "CSS", "JavaScript"],
+      "role": "Full-Stack Developer",
+      "achievements": "Built complete CRUD functionality, implemented user authentication, and created responsive UI",
+      "github_url": "https://github.com/janlau2001/ecommerce-project",
+      "live_demo": "https://demo-ecommerce.com",
+      "challenges_overcome": "Learned to handle complex database relationships and implement secure authentication systems"
+    },
+    {
+      "name": "Task Management System",
+      "description": "A web-based task management application for team collaboration with real-time updates",
+      "technologies": ["JavaScript", "HTML", "CSS", "MySQL", "PHP"],
+      "role": "Lead Developer",
+      "achievements": "Implemented real-time task updates, priority management, and team collaboration features",
+      "github_url": "https://github.com/janlau2001/task-manager",
+      "live_demo": "https://task-manager-demo.com",
+      "challenges_overcome": "Solved real-time synchronization challenges and optimized database queries for better performance"
+    },
+    {
+      "name": "Portfolio Website",
+      "description": "Personal portfolio website showcasing projects and skills",
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "role": "Designer & Developer",
+      "achievements": "Created responsive design that works across all devices with smooth animations",
+      "github_url": "https://github.com/janlau2001/portfolio",
+      "live_demo": "https://yourportfolio.com",
+      "challenges_overcome": "Mastered CSS animations and responsive design principles"
+    }
+  ],
+  
+  "skills": {
+    "programming_languages": [
+      {"language": "HTML", "proficiency": "Advanced", "years": 3},
+      {"language": "CSS", "proficiency": "Advanced", "years": 3},
+      {"language": "JavaScript", "proficiency": "Intermediate", "years": 2},
+      {"language": "Python", "proficiency": "Intermediate", "years": 2},
+      {"language": "Java", "proficiency": "Intermediate", "years": 2},
+      {"language": "PHP", "proficiency": "Intermediate", "years": 1}
+    ],
+    "frameworks_tools": [
+      "Laravel",
+      "Git",
+      "VS Code",
+      "Bootstrap",
+      "jQuery"
+    ],
+    "databases": ["MySQL", "PostgreSQL"],
+    "soft_skills": [
+      "Analytical thinking",
+      "Fast problem-solving",
+      "Fast typing",
+      "Team collaboration",
+      "Communication",
+      "Workplace proficiency",
+      "Fast learner"
+    ]
+  },
+  
+  "career_goals": {
+    "short_term": "Secure a full-stack developer position to gain professional experience and contribute to real-world projects",
+    "long_term": "Become a senior full-stack developer at a leading tech company like Google, Microsoft, or innovative startups, leading development teams",
+    "learning_focus": [
+      "Advanced JavaScript frameworks (React, Next.js)",
+      "Cloud technologies (AWS, Azure)",
+      "DevOps practices",
+      "Mobile app development",
+      "System architecture and design patterns"
+    ],
+    "industries_interested": [
+      "Software Development",
+      "Tech Companies (Big Tech)",
+      "Startups",
+      "E-commerce",
+      "Fintech"
+    ]
+  },
+  
+  "interview_prep": {
+    "strengths": [
+      "Analytical thinking - ability to break down complex problems into manageable solutions",
+      "Fast problem-solving - can quickly identify issues and implement effective solutions",
+      "Fast typing skills - improves productivity and code development speed",
+      "Workplace proficiency - professional attitude and ability to work well in team environments"
+    ],
+    "unique_value": "I combine strong technical skills with excellent soft skills. My analytical thinking helps me write efficient code, while my fast typing and problem-solving abilities allow me to deliver projects quickly. I'm not just a coder, I'm a team player who brings positive energy to the workplace.",
+    "passion_projects": "I actively contribute to open-source projects on GitHub and enjoy building web applications in my free time. My hobbies like chess enhance my strategic thinking, which translates well to software architecture decisions.",
+    "why_hire_me": "You should hire me because I bring a combination of technical proficiency across multiple languages (HTML, CSS, JavaScript, Python, Java, Laravel), proven ability to deliver results quickly, and a genuine passion for technology. I'm eager to learn, adapt fast, and contribute meaningfully to your team from day one. My analytical mindset and problem-solving skills mean I don't just write code - I create solutions that work."
+  },
+  
+  "content_chunks": []
+}
