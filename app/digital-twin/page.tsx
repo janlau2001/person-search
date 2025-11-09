@@ -31,7 +31,7 @@ export default function DigitalTwinPage() {
 
   const initializeSystem = async () => {
     setInitializing(true);
-    const result = await initializeDigitalTwin();
+    await initializeDigitalTwin();
     const statsResult = await getDigitalTwinStats();
     
     if (statsResult.success && statsResult.vectorCount) {
@@ -72,7 +72,7 @@ export default function DigitalTwinPage() {
           content: 'Sorry, I encountered an error. Please try again.'
         }]);
       }
-    } catch (error) {
+    } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: 'Sorry, something went wrong. Please try again.'
@@ -116,7 +116,7 @@ export default function DigitalTwinPage() {
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Jan's Digital Twin
+                  Jan&apos;s Digital Twin
                 </h1>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   AI-Powered Assistant

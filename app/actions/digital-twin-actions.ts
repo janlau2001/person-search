@@ -12,7 +12,6 @@ const groq = new Groq({
 const index = new Index({
   url: process.env.UPSTASH_VECTOR_REST_URL!,
   token: process.env.UPSTASH_VECTOR_REST_TOKEN!,
-  // @ts-ignore - Upstash will use the embedding model configured in the database
 });
 
 export async function initializeDigitalTwin() {
@@ -20,7 +19,6 @@ export async function initializeDigitalTwin() {
     // Check if data already exists
     const info = await index.info();
     
-    // @ts-ignore - Upstash SDK types may vary
     if (info.vectorCount && info.vectorCount > 0) {
       return {
         success: true,
@@ -135,9 +133,7 @@ export async function getDigitalTwinStats() {
     const info = await index.info();
     return {
       success: true,
-      // @ts-ignore
       vectorCount: info.vectorCount || 0,
-      // @ts-ignore
       dimension: info.dimension || 0,
     };
   } catch (error) {

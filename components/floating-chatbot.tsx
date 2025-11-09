@@ -23,7 +23,7 @@ export function FloatingChatbot() {
     if (isOpen && messages.length === 0) {
       setMessages([{
         role: 'assistant',
-        content: "Hi! I'm Jan's AI assistant. Ask me anything about his experience, skills, or projects!"
+        content: "Hi! I'm Jan&apos;s AI assistant. Ask me anything about his experience, skills, or projects!"
       }]);
     }
   }, [isOpen, messages.length]);
@@ -55,7 +55,7 @@ export function FloatingChatbot() {
           content: 'Sorry, I encountered an error. Please try again.'
         }]);
       }
-    } catch (error) {
+    } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: 'Sorry, something went wrong.'
@@ -85,7 +85,7 @@ export function FloatingChatbot() {
             <div className="flex items-center gap-2">
               <Bot className="h-5 w-5" />
               <div>
-                <h3 className="font-semibold">Jan's AI Assistant</h3>
+                <h3 className="font-semibold">Jan&apos;s AI Assistant</h3>
                 <p className="text-xs text-blue-100">Online</p>
               </div>
             </div>
