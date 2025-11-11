@@ -6,6 +6,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { DigitalTwinInitializer } from "@/components/digital-twin-initializer";
+import { AuthProvider } from "@/components/auth-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,22 +33,24 @@ export default function RootLayout({
     <body
       className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
     >          
+      <AuthProvider>
+        <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+          <DigitalTwinInitializer />
+          <Navbar />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Toaster />
 
-      <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-        <DigitalTwinInitializer />
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Toaster />
-
-        <Footer />
-        </ThemeProvider>    </body>
+          <Footer />
+        </ThemeProvider>
+      </AuthProvider>
+    </body>
 
   </html>  );
 }

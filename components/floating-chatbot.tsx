@@ -5,9 +5,10 @@ import { queryDigitalTwin } from '../app/actions/digital-twin-actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
-import { Loader2, Send, Bot, User, X, MessageCircle, Maximize2 } from 'lucide-react';
+import { Loader2, Send, Bot, User, X, MessageCircle, Maximize2, Lock } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useSession } from 'next-auth/react';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -20,15 +21,20 @@ export function FloatingChatbot() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { data: session, status } = useSession();
+
+  const isAuthenticated = status === 'authenticated';
+  const isLoading = status === 'loading';
 
   useEffect(() => {
-    if (isOpen && messages.length === 0) {
+    if (isOpen && messages.length === 0 && isAuthenticated) {
+      const userName = session?.user?.name || 'there';
       setMessages([{
         role: 'assistant',
-        content: "Hi! I'm Jan's AI assistant. Ask me anything about his experience, skills, or projects!"
+        content: `Hi ${userName}! I'm Jan's AI assistant. Ask me anything about his experience, skills, or projects!`
       }]);
     }
-  }, [isOpen, messages.length]);
+  }, [isOpen, messages.length, isAuthenticated, session]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -81,7 +87,11 @@ export function FloatingChatbot() {
             onClick={() => setIsOpen(true)}
             className="fixed bottom-6 right-6 h-16 w-16 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-2xl hover:shadow-3xl transition-all flex items-center justify-center z-50"
           >
-            <MessageCircle className="h-7 w-7" />
+            {isAuthenticated ? (
+              <MessageCircle className="h-7 w-7" />
+            ) : (
+              <Lock className="h-7 w-7" />
+            )}
           </motion.button>
         )}
       </AnimatePresence>
@@ -108,20 +118,24 @@ export function FloatingChatbot() {
                   </motion.div>
                   <div>
                     <h3 className="font-semibold text-lg">Jan's AI Assistant</h3>
-                    <p className="text-xs text-blue-100">Online • Ready to help</p>
+                    <p className="text-xs text-blue-100">
+                      {isAuthenticated ? 'Online • Ready to help' : 'Sign in required'}
+                    </p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Link href="/digital-twin">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-white hover:bg-blue-700"
-                      title="Open in full screen"
-                    >
-                      <Maximize2 className="h-4 w-4" />
-                    </Button>
-                  </Link>
+                  {isAuthenticated && (
+                    <Link href="/digital-twin">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-white hover:bg-blue-700"
+                        title="Open in full screen"
+                      >
+                        <Maximize2 className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  )}
                   <Button
                     variant="ghost"
                     size="sm"
@@ -133,8 +147,35 @@ export function FloatingChatbot() {
                 </div>
               </div>
 
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-3">
+              {/* Auth Gate or Messages */}
+              {!isAuthenticated ? (
+                <div className="flex-1 flex items-center justify-center p-8">
+                  <div className="text-center">
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="mb-6"
+                    >
+                      <Lock className="h-16 w-16 text-gray-400 mx-auto" />
+                    </motion.div>
+                    <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white">
+                      Sign In Required
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-6">
+                      Please sign in to chat with Jan's AI assistant
+                    </p>
+                    <Link href="/auth/signin">
+                      <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
+                        <Lock className="h-4 w-4 mr-2" />
+                        Sign In
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {/* Messages */}
+                  <div className="flex-1 overflow-y-auto p-4 space-y-3">
                 {messages.map((message, index) => (
                   <motion.div
                     key={index}
@@ -188,33 +229,35 @@ export function FloatingChatbot() {
                   </motion.div>
                 )}
                 
-                <div ref={messagesEndRef} />
-              </div>
+                    <div ref={messagesEndRef} />
+                  </div>
 
-              {/* Input */}
-              <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-b-lg">
-                <form onSubmit={handleSubmit} className="flex gap-2">
-                  <Input
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="Ask me anything..."
-                    disabled={loading}
-                    className="flex-1 rounded-full"
-                  />
-                  <Button 
-                    type="submit" 
-                    disabled={loading || !input.trim()} 
-                    size="sm"
-                    className="rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
-                  >
-                    {loading ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                      <Send className="h-4 w-4" />
-                    )}
-                  </Button>
-                </form>
-              </div>
+                  {/* Input */}
+                  <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-b-lg">
+                    <form onSubmit={handleSubmit} className="flex gap-2">
+                      <Input
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder="Ask me anything..."
+                        disabled={loading}
+                        className="flex-1 rounded-full"
+                      />
+                      <Button 
+                        type="submit" 
+                        disabled={loading || !input.trim()} 
+                        size="sm"
+                        className="rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
+                      >
+                        {loading ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Send className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </form>
+                  </div>
+                </>
+              )}
             </Card>
           </motion.div>
         )}
