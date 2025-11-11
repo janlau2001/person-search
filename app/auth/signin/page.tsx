@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 
-export default function SignInPage() {
+function SignInForm() {
   const [guestName, setGuestName] = useState('');
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
@@ -156,5 +156,17 @@ export default function SignInPage() {
         </motion.div>
       </motion.div>
     </div>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    }>
+      <SignInForm />
+    </Suspense>
   );
 }
