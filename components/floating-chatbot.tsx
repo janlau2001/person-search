@@ -24,7 +24,6 @@ export function FloatingChatbot() {
   const { data: session, status } = useSession();
 
   const isAuthenticated = status === 'authenticated';
-  const isLoading = status === 'loading';
 
   useEffect(() => {
     if (isOpen && messages.length === 0 && isAuthenticated) {
