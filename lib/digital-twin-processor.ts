@@ -31,13 +31,13 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
   });
 
   // Hobbies and Interests
-  if (personal.hobbies) {
-    const hobbiesText = personal.hobbies.join(", ");
+  if (personal.personality_traits?.hobbies) {
+    const hobbiesText = personal.personality_traits.hobbies.join(", ");
     chunks.push({
       id: `chunk_${chunkId++}`,
       title: "Hobbies and Interests",
       type: "personal",
-      content: `${personal.name} enjoys ${hobbiesText}. Favorite food is ${personal.favorite_food} and favorite color is ${personal.favorite_color}.`,
+      content: `${personal.name} enjoys ${hobbiesText}. Favorite food is ${personal.personality_traits.favorite_food} and favorite color is ${personal.personality_traits.favorite_color}.`,
       metadata: {
         category: "personal",
         tags: ["hobbies", "interests", "lifestyle"]
@@ -47,7 +47,11 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
 
   // Education Chunks
   const education = data.education;
-  const coursework = education.relevant_coursework.join(", ");
+  const coursework = education.relevant_coursework
+    .map((course: string | { course: string }) => 
+      typeof course === 'string' ? course : course.course
+    )
+    .join(", ");
   chunks.push({
     id: `chunk_${chunkId++}`,
     title: "Education Background",
@@ -90,11 +94,18 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
   // Projects Chunks
   data.projects.forEach(project => {
     const techList = project.technologies.join(", ");
+    const achievementsText = typeof project.achievements === 'object' && project.achievements !== null
+      ? Object.entries(project.achievements).map(([key, value]) => `${key}: ${value}`).join(", ")
+      : String(project.achievements || '');
+    const challengesText = Array.isArray(project.challenges_overcome)
+      ? project.challenges_overcome.join(". ")
+      : String(project.challenges_overcome || '');
+    
     chunks.push({
       id: `chunk_${chunkId++}`,
       title: `Project: ${project.name}`,
       type: "project",
-      content: `${project.name} - ${project.description} Role: ${project.role}. Technologies used: ${techList}. Achievements: ${project.achievements} Challenges overcome: ${project.challenges_overcome}`,
+      content: `${project.name} - ${project.description} Role: ${project.role}. Technologies used: ${techList}. Achievements: ${achievementsText} Challenges overcome: ${challengesText}`,
       metadata: {
         category: "project",
         tags: ["development", "coding", "portfolio"]
@@ -122,7 +133,11 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
   });
 
   // Frameworks and tools
-  const frameworks = skills.frameworks_tools.join(", ");
+  const frameworks = (skills.frameworks_libraries || [])
+    .map((tool: string | { name: string }) => 
+      typeof tool === 'string' ? tool : tool.name
+    )
+    .join(", ");
   chunks.push({
     id: `chunk_${chunkId++}`,
     title: "Frameworks and Tools",
@@ -135,7 +150,11 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
   });
 
   // Databases
-  const databases = skills.databases.join(", ");
+  const databases = skills.databases
+    .map((db: string | { name: string }) => 
+      typeof db === 'string' ? db : db.name
+    )
+    .join(", ");
   chunks.push({
     id: `chunk_${chunkId++}`,
     title: "Database Experience",
@@ -148,7 +167,11 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
   });
 
   // Soft skills
-  const softSkills = skills.soft_skills.join(", ");
+  const softSkills = skills.soft_skills
+    .map((skill: string | { skill: string }) => 
+      typeof skill === 'string' ? skill : skill.skill
+    )
+    .join(", ");
   chunks.push({
     id: `chunk_${chunkId++}`,
     title: "Soft Skills",
@@ -162,14 +185,30 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
 
   // Career Goals
   const career = data.career_goals;
-  const learning = career.learning_focus.join(", ");
-  const industries = career.industries_interested.join(", ");
+  const shortTerm = typeof career.short_term === 'string' 
+    ? career.short_term 
+    : career.short_term.primary_goal;
+  const longTerm = typeof career.long_term === 'string' 
+    ? career.long_term 
+    : career.long_term.primary_goal;
+  const learning = Array.isArray(career.learning_focus)
+    ? career.learning_focus.join(", ")
+    : (typeof career.learning_focus === 'object' && career.learning_focus.currently_learning
+      ? career.learning_focus.currently_learning.join(", ")
+      : '');
+  const industries = Array.isArray(career.industries_interested)
+    ? career.industries_interested
+        .map((item: string | { industry: string }) => 
+          typeof item === 'string' ? item : item.industry
+        )
+        .join(", ")
+    : '';
   
   chunks.push({
     id: `chunk_${chunkId++}`,
     title: "Career Goals and Aspirations",
     type: "career",
-    content: `Short-term goal: ${career.short_term} Long-term vision: ${career.long_term} Currently learning: ${learning}. Interested in industries: ${industries}.`,
+    content: `Short-term goal: ${shortTerm} Long-term vision: ${longTerm} Currently learning: ${learning}. Interested in industries: ${industries}.`,
     metadata: {
       category: "career",
       tags: ["goals", "aspirations", "future"]
@@ -178,7 +217,11 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
 
   // Interview Prep
   const interview = data.interview_prep;
-  const strengths = interview.strengths.join(" ");
+  const strengths = interview.strengths
+    .map((strength: string | { strength: string }) => 
+      typeof strength === 'string' ? strength : strength.strength
+    )
+    .join(" ");
   
   chunks.push({
     id: `chunk_${chunkId++}`,
@@ -195,7 +238,7 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
     id: `chunk_${chunkId++}`,
     title: "Unique Value Proposition",
     type: "interview",
-    content: `What makes me unique: ${interview.unique_value} Passion projects: ${interview.passion_projects}`,
+    content: `What makes me unique: ${'unique_value_proposition' in interview ? interview.unique_value_proposition.what_makes_me_different : String((interview as Record<string, unknown>).unique_value || '')} Passion: ${'passion_for_technology' in interview ? interview.passion_for_technology.genuine_interest : String((interview as Record<string, unknown>).passion_projects || '')}`,
     metadata: {
       category: "interview",
       tags: ["value", "differentiation", "unique"]
@@ -206,7 +249,9 @@ export function generateContentChunks(data: typeof digitalTwinData): ContentChun
     id: `chunk_${chunkId++}`,
     title: "Why Hire Me",
     type: "interview",
-    content: interview.why_hire_me,
+    content: typeof interview.why_hire_me === 'string' 
+      ? interview.why_hire_me 
+      : interview.why_hire_me.elevator_pitch,
     metadata: {
       category: "interview",
       tags: ["hiring", "value", "pitch"]
