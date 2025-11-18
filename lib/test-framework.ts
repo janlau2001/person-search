@@ -4,7 +4,8 @@
  */
 
 import { processQuery } from './query-processor';
-import { testQuestions, getTestSummary, type TestQuestion } from './test-questions';
+import { testQuestions, getTestSummary } from './test-questions';
+import type { TestQuestion } from './test-questions';
 
 export interface TestResult {
   questionId: number;
