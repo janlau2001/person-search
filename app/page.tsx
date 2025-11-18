@@ -137,7 +137,7 @@ export default function Home() {
               >
                 <h3 className="font-semibold text-xl mb-4">Hobbies & Interests</h3>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {personal.hobbies?.map((hobby, idx) => (
+                  {personal.personality_traits?.hobbies?.map((hobby, idx) => (
                     <motion.div
                       key={idx}
                       initial={{ scale: 0 }}
@@ -152,11 +152,11 @@ export default function Home() {
                 <div className="mt-4 space-y-3 text-base text-gray-700 dark:text-gray-300">
                   <p className="flex items-center gap-2">
                     <span className="text-2xl">🍔</span>
-                    <span><strong>Favorite Food:</strong> {personal.favorite_food}</span>
+                    <span><strong>Favorite Food:</strong> {personal.personality_traits?.favorite_food}</span>
                   </p>
                   <p className="flex items-center gap-2">
                     <span className="text-2xl">🎨</span>
-                    <span><strong>Favorite Color:</strong> {personal.favorite_color}</span>
+                    <span><strong>Favorite Color:</strong> {personal.personality_traits?.favorite_color}</span>
                   </p>
                 </div>
               </motion.div>
