@@ -73,7 +73,7 @@ export default function AboutPage() {
                 <h3 className="font-semibold text-lg mb-2">Industries of Interest</h3>
                 <div className="flex flex-wrap gap-2">
                   {(Array.isArray(career_goals.industries_interested)
-                    ? career_goals.industries_interested.map((item: any) => 
+                    ? career_goals.industries_interested.map((item: string | { industry: string }) => 
                         typeof item === 'string' ? item : item.industry
                       )
                     : []
@@ -103,7 +103,7 @@ export default function AboutPage() {
                 <div>
                   <h3 className="font-semibold text-xl mb-3">Key Strengths</h3>
                   <ul className="space-y-2">
-                    {interview_prep.strengths.map((strength: any, idx: number) => (
+                    {interview_prep.strengths.map((strength: string | { strength: string }, idx: number) => (
                       <li key={idx} className="flex items-start gap-2">
                         <span className="text-yellow-300">★</span>
                         <span>{typeof strength === 'string' ? strength : strength.strength}</span>
@@ -117,14 +117,14 @@ export default function AboutPage() {
                   <p className="text-blue-50 mb-4">
                     {'unique_value_proposition' in interview_prep 
                       ? interview_prep.unique_value_proposition.what_makes_me_different
-                      : (interview_prep as any).unique_value || ''}
+                      : String((interview_prep as Record<string, unknown>).unique_value || '')}
                   </p>
                   <div>
                     <h4 className="font-semibold mb-2">Passion for Technology</h4>
                     <p className="text-blue-50">
                       {'passion_for_technology' in interview_prep
                         ? interview_prep.passion_for_technology.genuine_interest
-                        : (interview_prep as any).passion_projects || ''}
+                        : String((interview_prep as Record<string, unknown>).passion_projects || '')}
                     </p>
                   </div>
                 </div>
