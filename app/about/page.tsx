@@ -33,7 +33,11 @@ export default function AboutPage() {
                   <TrendingUp className="h-5 w-5 text-green-600" />
                   Short-term Goals
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300">{career_goals.short_term}</p>
+                <p className="text-gray-700 dark:text-gray-300">
+                  {typeof career_goals.short_term === 'string' 
+                    ? career_goals.short_term 
+                    : career_goals.short_term.primary_goal}
+                </p>
               </div>
 
               <div>
@@ -41,7 +45,11 @@ export default function AboutPage() {
                   <Sparkles className="h-5 w-5 text-yellow-600" />
                   Long-term Vision
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300">{career_goals.long_term}</p>
+                <p className="text-gray-700 dark:text-gray-300">
+                  {typeof career_goals.long_term === 'string' 
+                    ? career_goals.long_term 
+                    : career_goals.long_term.primary_goal}
+                </p>
               </div>
 
               <div>
@@ -50,7 +58,12 @@ export default function AboutPage() {
                   Currently Learning
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {career_goals.learning_focus.map((item, idx) => (
+                  {(typeof career_goals.learning_focus === 'object' && 'currently_learning' in career_goals.learning_focus
+                    ? career_goals.learning_focus.currently_learning
+                    : Array.isArray(career_goals.learning_focus) 
+                    ? career_goals.learning_focus 
+                    : []
+                  ).map((item: string, idx: number) => (
                     <Badge key={idx} variant="secondary">{item}</Badge>
                   ))}
                 </div>
@@ -59,7 +72,12 @@ export default function AboutPage() {
               <div>
                 <h3 className="font-semibold text-lg mb-2">Industries of Interest</h3>
                 <div className="flex flex-wrap gap-2">
-                  {career_goals.industries_interested.map((industry, idx) => (
+                  {(Array.isArray(career_goals.industries_interested)
+                    ? career_goals.industries_interested.map((item: any) => 
+                        typeof item === 'string' ? item : item.industry
+                      )
+                    : []
+                  ).map((industry: string, idx: number) => (
                     <Badge key={idx} variant="outline">{industry}</Badge>
                   ))}
                 </div>
@@ -75,16 +93,20 @@ export default function AboutPage() {
               <CardTitle className="text-3xl">Why Work With Me?</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-lg leading-relaxed mb-6">{interview_prep.why_hire_me}</p>
+              <p className="text-lg leading-relaxed mb-6">
+                {typeof interview_prep.why_hire_me === 'string' 
+                  ? interview_prep.why_hire_me 
+                  : interview_prep.why_hire_me.elevator_pitch}
+              </p>
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h3 className="font-semibold text-xl mb-3">Key Strengths</h3>
                   <ul className="space-y-2">
-                    {interview_prep.strengths.map((strength, idx) => (
+                    {interview_prep.strengths.map((strength: any, idx: number) => (
                       <li key={idx} className="flex items-start gap-2">
                         <span className="text-yellow-300">★</span>
-                        <span>{strength}</span>
+                        <span>{typeof strength === 'string' ? strength : strength.strength}</span>
                       </li>
                     ))}
                   </ul>
@@ -92,10 +114,18 @@ export default function AboutPage() {
 
                 <div>
                   <h3 className="font-semibold text-xl mb-3">What Makes Me Unique</h3>
-                  <p className="text-blue-50 mb-4">{interview_prep.unique_value}</p>
+                  <p className="text-blue-50 mb-4">
+                    {'unique_value_proposition' in interview_prep 
+                      ? interview_prep.unique_value_proposition.what_makes_me_different
+                      : (interview_prep as any).unique_value || ''}
+                  </p>
                   <div>
-                    <h4 className="font-semibold mb-2">Passion Projects</h4>
-                    <p className="text-blue-50">{interview_prep.passion_projects}</p>
+                    <h4 className="font-semibold mb-2">Passion for Technology</h4>
+                    <p className="text-blue-50">
+                      {'passion_for_technology' in interview_prep
+                        ? interview_prep.passion_for_technology.genuine_interest
+                        : (interview_prep as any).passion_projects || ''}
+                    </p>
                   </div>
                 </div>
               </div>
