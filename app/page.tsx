@@ -196,7 +196,7 @@ export default function Home() {
               <p className="text-base text-gray-600 dark:text-gray-400 mb-6">Expected Graduation: {education.graduation_year}</p>
               <div>
                 <h4 className="font-semibold text-lg mb-4">Relevant Coursework:</h4>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-3 mt-4">
                   {education.relevant_coursework.map((course, idx) => (
                     <motion.div
                       key={idx}
@@ -205,7 +205,9 @@ export default function Home() {
                       transition={{ delay: idx * 0.05, type: "spring" }}
                       whileHover={{ scale: 1.1, rotate: 5 }}
                     >
-                      <Badge variant="outline" className="text-sm py-2 px-4">{course}</Badge>
+                      <Badge variant="outline" className="text-sm py-2 px-4">
+                        {typeof course === 'string' ? course : course.course}
+                      </Badge>
                     </motion.div>
                   ))}
                 </div>
@@ -307,7 +309,7 @@ export default function Home() {
               >
                 <h3 className="font-semibold text-xl mb-4">Frameworks & Tools</h3>
                 <div className="flex flex-wrap gap-3">
-                  {skills.frameworks_tools.map((tool, idx) => (
+                  {(skills.frameworks_libraries || []).map((tool: string | { name: string }, idx: number) => (
                     <motion.div
                       key={idx}
                       initial={{ scale: 0 }}
@@ -315,7 +317,9 @@ export default function Home() {
                       transition={{ delay: idx * 0.03 }}
                       whileHover={{ scale: 1.15, rotate: 2 }}
                     >
-                      <Badge variant="outline" className="text-sm py-2 px-4">{tool}</Badge>
+                      <Badge variant="outline" className="text-sm py-2 px-4">
+                        {typeof tool === 'string' ? tool : tool.name}
+                      </Badge>
                     </motion.div>
                   ))}
                 </div>
@@ -326,7 +330,7 @@ export default function Home() {
               >
                 <h3 className="font-semibold text-xl mb-4">Databases</h3>
                 <div className="flex flex-wrap gap-3">
-                  {skills.databases.map((db, idx) => (
+                  {skills.databases.map((db: string | { name: string }, idx: number) => (
                     <motion.div
                       key={idx}
                       initial={{ scale: 0 }}
@@ -334,7 +338,9 @@ export default function Home() {
                       transition={{ delay: idx * 0.05 }}
                       whileHover={{ scale: 1.15, rotate: -2 }}
                     >
-                      <Badge variant="outline" className="text-sm py-2 px-4">{db}</Badge>
+                      <Badge variant="outline" className="text-sm py-2 px-4">
+                        {typeof db === 'string' ? db : db.name}
+                      </Badge>
                     </motion.div>
                   ))}
                 </div>
@@ -345,7 +351,7 @@ export default function Home() {
               >
                 <h3 className="font-semibold text-xl mb-4">Soft Skills</h3>
                 <div className="flex flex-wrap gap-3">
-                  {skills.soft_skills.map((skill, idx) => (
+                  {skills.soft_skills.map((skill: string | { skill: string }, idx: number) => (
                     <motion.div
                       key={idx}
                       initial={{ scale: 0 }}
@@ -353,7 +359,9 @@ export default function Home() {
                       transition={{ delay: idx * 0.04 }}
                       whileHover={{ scale: 1.15 }}
                     >
-                      <Badge variant="secondary" className="text-sm py-2 px-4">{skill}</Badge>
+                      <Badge variant="secondary" className="text-sm py-2 px-4">
+                        {typeof skill === 'string' ? skill : skill.skill}
+                      </Badge>
                     </motion.div>
                   ))}
                 </div>
