@@ -5,7 +5,7 @@ import { initializeDigitalTwin, queryDigitalTwin, getDigitalTwinStats } from '..
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
-import { Loader2, Send, Bot, User, Sparkles } from 'lucide-react';
+import { Loader2, Send, Bot, User, Sparkles, RefreshCw } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -41,6 +41,13 @@ export default function DigitalTwinPage() {
     setInitializing(false);
     
     // Add welcome message
+    setMessages([{
+      role: 'assistant',
+      content: "Hi! I'm Jan Laurence's AI Digital Twin. I can answer questions about my background, skills, experience, projects, and career goals. Ask me anything!"
+    }]);
+  };
+
+  const handleClearChat = () => {
     setMessages([{
       role: 'assistant',
       content: "Hi! I'm Jan Laurence's AI Digital Twin. I can answer questions about my background, skills, experience, projects, and career goals. Ask me anything!"
@@ -123,14 +130,25 @@ export default function DigitalTwinPage() {
                 </p>
               </div>
             </div>
-            {stats && (
-              <div className="text-right">
-                <p className="text-xs text-gray-500 dark:text-gray-400">Knowledge Base</p>
-                <p className="text-sm font-semibold text-blue-600">
-                  {stats.vectorCount} chunks loaded
-                </p>
-              </div>
-            )}
+            <div className="flex items-center gap-3">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleClearChat}
+                className="flex items-center gap-2"
+              >
+                <RefreshCw className="h-4 w-4" />
+                Clear Chat
+              </Button>
+              {stats && (
+                <div className="text-right">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">Knowledge Base</p>
+                  <p className="text-sm font-semibold text-blue-600">
+                    {stats.vectorCount} chunks loaded
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
