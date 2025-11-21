@@ -26,13 +26,15 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2 group">
               <Avatar className="h-8 w-8">
-                <AvatarFallback className="bg-blue-600 text-white font-bold">
-                  LO
+                <AvatarFallback className="bg-blue-600 text-white font-bold text-xs">
+                  JLHO
                 </AvatarFallback>
               </Avatar>
-              <span className="ml-1 text-lg font-semibold text-foreground">LO</span>
+              <span className="text-lg font-semibold text-foreground overflow-hidden max-w-0 group-hover:max-w-xs transition-all duration-300 whitespace-nowrap">
+                Jan Laurence H. Olarte
+              </span>
             </Link>
           </div>
           <div className="flex items-center space-x-4">
