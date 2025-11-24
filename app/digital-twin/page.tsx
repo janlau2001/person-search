@@ -162,7 +162,7 @@ export default function DigitalTwinPage() {
     }
   };
 
-  const handleSubmit = async (e?: React.FormEvent, autoSubmit = false) => {
+  const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!input.trim() || loading) return;
 
