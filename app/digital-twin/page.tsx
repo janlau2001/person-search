@@ -5,7 +5,7 @@ import { initializeDigitalTwin, queryDigitalTwin, getDigitalTwinStats } from '..
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
-import { Loader2, Send, Bot, User, Sparkles, RefreshCw } from 'lucide-react';
+import { Loader2, Send, Bot, User, Sparkles, RefreshCw, Mic, MicOff } from 'lucide-react';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -19,10 +19,40 @@ export default function DigitalTwinPage() {
   const [loading, setLoading] = useState(false);
   const [initializing, setInitializing] = useState(true);
   const [stats, setStats] = useState<{ vectorCount: number } | null>(null);
+  const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
 
   useEffect(() => {
     initializeSystem();
+    
+    // Initialize speech recognition
+    if (typeof window !== 'undefined') {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        const recognition = new SpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        recognition.onresult = (event: any) => {
+          const transcript = event.results[0][0].transcript;
+          setInput(transcript);
+          setIsListening(false);
+        };
+
+        recognition.onerror = (event: any) => {
+          console.error('Speech recognition error:', event.error);
+          setIsListening(false);
+        };
+
+        recognition.onend = () => {
+          setIsListening(false);
+        };
+
+        recognitionRef.current = recognition;
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -52,6 +82,21 @@ export default function DigitalTwinPage() {
       role: 'assistant',
       content: "Hi! I'm Jan Laurence's AI Digital Twin. I can answer questions about my background, skills, experience, projects, and career goals. Ask me anything!"
     }]);
+  };
+
+  const toggleListening = () => {
+    if (!recognitionRef.current) {
+      alert('Speech recognition is not supported in your browser. Please try Chrome or Edge.');
+      return;
+    }
+
+    if (isListening) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+    } else {
+      recognitionRef.current.start();
+      setIsListening(true);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -260,6 +305,20 @@ export default function DigitalTwinPage() {
               disabled={loading}
               className="flex-1"
             />
+            <Button 
+              type="button" 
+              variant="outline"
+              size="icon"
+              onClick={toggleListening}
+              disabled={loading}
+              className={isListening ? 'bg-red-100 dark:bg-red-900 border-red-500' : ''}
+            >
+              {isListening ? (
+                <MicOff className="h-4 w-4 text-red-600 animate-pulse" />
+              ) : (
+                <Mic className="h-4 w-4" />
+              )}
+            </Button>
             <Button type="submit" disabled={loading || !input.trim()}>
               {loading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
