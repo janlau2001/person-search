@@ -76,6 +76,11 @@ export default function DigitalTwinPage() {
           if (finalTranscript) {
             setInput(finalTranscript);
             console.log('Final transcript:', finalTranscript);
+            // Auto-submit after a brief delay to ensure state is updated
+            setTimeout(() => {
+              const submitEvent = new Event('submit', { cancelable: true, bubbles: true });
+              document.querySelector('form')?.dispatchEvent(submitEvent);
+            }, 300);
           }
         };
 
@@ -157,8 +162,8 @@ export default function DigitalTwinPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e?: React.FormEvent, autoSubmit = false) => {
+    if (e) e.preventDefault();
     if (!input.trim() || loading) return;
 
     const userMessage: Message = { role: 'user', content: input };
