@@ -21,27 +21,36 @@ export default function DigitalTwinPage() {
   const [stats, setStats] = useState<{ vectorCount: number } | null>(null);
   const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<unknown>(null);
 
   useEffect(() => {
     initializeSystem();
     
     // Initialize speech recognition
     if (typeof window !== 'undefined') {
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      const SpeechRecognition = (window as Window & typeof globalThis & { SpeechRecognition?: unknown; webkitSpeechRecognition?: unknown }).SpeechRecognition || (window as Window & typeof globalThis & { SpeechRecognition?: unknown; webkitSpeechRecognition?: unknown }).webkitSpeechRecognition;
       if (SpeechRecognition) {
-        const recognition = new SpeechRecognition();
+        const recognition = new (SpeechRecognition as new () => {
+          continuous: boolean;
+          interimResults: boolean;
+          lang: string;
+          onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void;
+          onerror: (event: { error: string }) => void;
+          onend: () => void;
+          start: () => void;
+          stop: () => void;
+        })();
         recognition.continuous = false;
         recognition.interimResults = false;
         recognition.lang = 'en-US';
 
-        recognition.onresult = (event: any) => {
+        recognition.onresult = (event) => {
           const transcript = event.results[0][0].transcript;
           setInput(transcript);
           setIsListening(false);
         };
 
-        recognition.onerror = (event: any) => {
+        recognition.onerror = (event) => {
           console.error('Speech recognition error:', event.error);
           setIsListening(false);
         };
@@ -90,11 +99,13 @@ export default function DigitalTwinPage() {
       return;
     }
 
+    const recognition = recognitionRef.current as { start: () => void; stop: () => void };
+
     if (isListening) {
-      recognitionRef.current.stop();
+      recognition.stop();
       setIsListening(false);
     } else {
-      recognitionRef.current.start();
+      recognition.start();
       setIsListening(true);
     }
   };
