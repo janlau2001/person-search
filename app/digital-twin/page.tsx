@@ -37,25 +37,34 @@ export default function DigitalTwinPage() {
           onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void;
           onerror: (event: { error: string }) => void;
           onend: () => void;
+          onstart: () => void;
           start: () => void;
           stop: () => void;
         })();
-        recognition.continuous = false;
-        recognition.interimResults = false;
+        recognition.continuous = true;
+        recognition.interimResults = true;
         recognition.lang = 'en-US';
+
+        recognition.onstart = () => {
+          console.log('Speech recognition started');
+          setIsListening(true);
+        };
 
         recognition.onresult = (event) => {
           const transcript = event.results[0][0].transcript;
           setInput(transcript);
-          setIsListening(false);
         };
 
         recognition.onerror = (event) => {
           console.error('Speech recognition error:', event.error);
           setIsListening(false);
+          if (event.error === 'not-allowed') {
+            alert('Microphone access denied. Please allow microphone access in your browser settings.');
+          }
         };
 
         recognition.onend = () => {
+          console.log('Speech recognition ended');
           setIsListening(false);
         };
 
@@ -308,11 +317,21 @@ export default function DigitalTwinPage() {
 
         {/* Input Form */}
         <Card className="p-4 bg-white dark:bg-gray-800">
+          {isListening && (
+            <div className="mb-3 flex items-center gap-2 text-sm text-red-600 dark:text-red-400 animate-pulse">
+              <div className="flex gap-1">
+                <div className="w-1 h-4 bg-red-600 rounded animate-pulse" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-1 h-4 bg-red-600 rounded animate-pulse" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-1 h-4 bg-red-600 rounded animate-pulse" style={{ animationDelay: '300ms' }}></div>
+              </div>
+              <span className="font-medium">Listening... Speak now</span>
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="flex gap-2">
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask me anything about Jan..."
+              placeholder={isListening ? "Listening..." : "Ask me anything about Jan..."}
               disabled={loading}
               className="flex-1"
             />
@@ -322,10 +341,11 @@ export default function DigitalTwinPage() {
               size="icon"
               onClick={toggleListening}
               disabled={loading}
-              className={isListening ? 'bg-red-100 dark:bg-red-900 border-red-500' : ''}
+              className={isListening ? 'bg-red-100 dark:bg-red-900 border-red-500 animate-pulse' : ''}
+              title={isListening ? 'Stop recording' : 'Start recording'}
             >
               {isListening ? (
-                <MicOff className="h-4 w-4 text-red-600 animate-pulse" />
+                <MicOff className="h-4 w-4 text-red-600" />
               ) : (
                 <Mic className="h-4 w-4" />
               )}
