@@ -34,16 +34,26 @@ export default function DigitalTwinPage() {
           continuous: boolean;
           interimResults: boolean;
           lang: string;
-          onresult: (event: { results: { [key: number]: { [key: number]: { transcript: string } } } }) => void;
+          maxAlternatives: number;
+          onresult: (event: { 
+            results: { 
+              length: number;
+              [key: number]: { 
+                [key: number]: { transcript: string };
+                isFinal: boolean;
+              } 
+            } 
+          }) => void;
           onerror: (event: { error: string }) => void;
           onend: () => void;
           onstart: () => void;
           start: () => void;
           stop: () => void;
         })();
-        recognition.continuous = true;
+        recognition.continuous = false;
         recognition.interimResults = true;
         recognition.lang = 'en-US';
+        recognition.maxAlternatives = 1;
 
         recognition.onstart = () => {
           console.log('Speech recognition started');
@@ -51,8 +61,22 @@ export default function DigitalTwinPage() {
         };
 
         recognition.onresult = (event) => {
-          const transcript = event.results[0][0].transcript;
-          setInput(transcript);
+          console.log('Speech recognition result received');
+          let finalTranscript = '';
+          
+          for (let i = 0; i < event.results.length; i++) {
+            const transcript = event.results[i][0].transcript;
+            if (event.results[i].isFinal) {
+              finalTranscript += transcript;
+            } else {
+              setInput(transcript);
+            }
+          }
+          
+          if (finalTranscript) {
+            setInput(finalTranscript);
+            console.log('Final transcript:', finalTranscript);
+          }
         };
 
         recognition.onerror = (event) => {
@@ -60,6 +84,12 @@ export default function DigitalTwinPage() {
           setIsListening(false);
           if (event.error === 'not-allowed') {
             alert('Microphone access denied. Please allow microphone access in your browser settings.');
+          } else if (event.error === 'no-speech') {
+            alert('No speech detected. Please try again.');
+          } else if (event.error === 'aborted') {
+            console.log('Speech recognition aborted');
+          } else {
+            alert(`Speech recognition error: ${event.error}`);
           }
         };
 
@@ -111,11 +141,19 @@ export default function DigitalTwinPage() {
     const recognition = recognitionRef.current as { start: () => void; stop: () => void };
 
     if (isListening) {
-      recognition.stop();
-      setIsListening(false);
+      try {
+        recognition.stop();
+      } catch (error) {
+        console.error('Error stopping recognition:', error);
+        setIsListening(false);
+      }
     } else {
-      recognition.start();
-      setIsListening(true);
+      try {
+        recognition.start();
+      } catch (error) {
+        console.error('Error starting recognition:', error);
+        alert('Could not start speech recognition. Please make sure you have granted microphone permissions.');
+      }
     }
   };
 
