@@ -4,7 +4,7 @@ import { FloatingChatbot } from '@/components/floating-chatbot';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, Mail, MapPin, GraduationCap, Briefcase, Code, Heart, Sparkles } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, GraduationCap, Briefcase, Code, Heart, Sparkles, Phone, Facebook, Instagram } from 'lucide-react';
 import Link from 'next/link';
 import digitalTwinData from '../digitaltwin.json';
 import { motion } from 'framer-motion';
@@ -413,6 +413,100 @@ export default function Home() {
                   </Card>
                 </motion.div>
               ))}
+            </div>
+          </Card>
+        </motion.section>
+
+        {/* Contact Me Section */}
+        <motion.section 
+          className="mb-20"
+          {...fadeInUp}
+          transition={{ delay: 0.7 }}
+        >
+          <Card className="p-8 md:p-10 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-700 shadow-2xl border-2 hover:shadow-3xl transition-all duration-300">
+            <h2 className="text-4xl font-bold mb-8 text-center">Contact Me</h2>
+            <div className="max-w-2xl mx-auto">
+              <motion.div 
+                className="text-center mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <h3 className="text-2xl font-semibold mb-2">Jan Laurence H. Olarte</h3>
+                <p className="text-gray-600 dark:text-gray-300">Full-Stack Developer | Information Technology Student</p>
+              </motion.div>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Phone */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
+                >
+                  <Phone className="h-6 w-6 text-blue-600" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Phone</p>
+                    <a href="tel:+639360537373" className="font-medium hover:text-blue-600 transition-colors">
+                      +63 936 053 7373
+                    </a>
+                  </div>
+                </motion.div>
+
+                {/* Yahoo Email */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
+                >
+                  <Mail className="h-6 w-6 text-purple-600" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Yahoo Mail</p>
+                    <a href="mailto:janlaurenceolarte@yahoo.com" className="font-medium hover:text-purple-600 transition-colors text-sm">
+                      janlaurenceolarte@yahoo.com
+                    </a>
+                  </div>
+                </motion.div>
+
+                {/* Gmail */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
+                >
+                  <Mail className="h-6 w-6 text-red-600" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Gmail</p>
+                    <a href="mailto:janlaurenceolarte070101@gmail.com" className="font-medium hover:text-red-600 transition-colors text-sm">
+                      janlaurenceolarte070101@gmail.com
+                    </a>
+                  </div>
+                </motion.div>
+
+                {/* Facebook */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
+                >
+                  <Facebook className="h-6 w-6 text-blue-500" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Facebook</p>
+                    <a href="https://facebook.com/janlaurence.olarte" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-blue-500 transition-colors">
+                      facebook.com/janlaurence.olarte
+                    </a>
+                  </div>
+                </motion.div>
+
+                {/* Instagram */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all md:col-span-2"
+                >
+                  <Instagram className="h-6 w-6 text-pink-600" />
+                  <div>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Instagram</p>
+                    <a href="https://instagram.com/janlaurence.olarte" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-pink-600 transition-colors">
+                      @janlaurence.olarte
+                    </a>
+                  </div>
+                </motion.div>
+              </div>
             </div>
           </Card>
         </motion.section>
