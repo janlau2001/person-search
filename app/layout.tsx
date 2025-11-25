@@ -6,7 +6,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { DigitalTwinInitializer } from "@/components/digital-twin-initializer";
-import { AuthProvider } from "@/components/auth-provider";
+import { ClerkProvider } from '@clerk/nextjs';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,29 +29,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-    <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
-    >          
-      <AuthProvider>
-        <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-          <DigitalTwinInitializer />
-          <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Toaster />
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning={true}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+      >          
+          <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+              >
+            <DigitalTwinInitializer />
+            <Navbar />
+            <main className="flex-grow">
+              {children}
+            </main>
+            <Toaster />
 
-          <Footer />
-        </ThemeProvider>
-      </AuthProvider>
-    </body>
+            <Footer />
+          </ThemeProvider>
+      </body>
 
-  </html>  );
+    </html>
+    </ClerkProvider>
+  );
 }
 

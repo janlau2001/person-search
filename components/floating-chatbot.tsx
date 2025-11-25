@@ -8,7 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Loader2, Send, Bot, User, X, MessageCircle, Maximize2, Lock } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSession } from 'next-auth/react';
+import { useUser } from '@clerk/nextjs';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -21,19 +21,19 @@ export function FloatingChatbot() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { data: session, status } = useSession();
+  const { user, isLoaded } = useUser();
 
-  const isAuthenticated = status === 'authenticated';
+  const isAuthenticated = isLoaded && !!user;
 
   useEffect(() => {
     if (isOpen && messages.length === 0 && isAuthenticated) {
-      const userName = session?.user?.name || 'there';
+      const userName = user?.firstName || user?.fullName || 'there';
       setMessages([{
         role: 'assistant',
         content: `Hi ${userName}! I'm Jan's AI assistant. Ask me anything about his experience, skills, or projects!`
       }]);
     }
-  }, [isOpen, messages.length, isAuthenticated, session]);
+  }, [isOpen, messages.length, isAuthenticated, user]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -163,7 +163,7 @@ export function FloatingChatbot() {
                     <p className="text-gray-600 dark:text-gray-400 mb-6">
                       Please sign in to chat with Jan's AI assistant
                     </p>
-                    <Link href="/auth/signin">
+                    <Link href="/sign-in">
                       <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
                         <Lock className="h-4 w-4 mr-2" />
                         Sign In

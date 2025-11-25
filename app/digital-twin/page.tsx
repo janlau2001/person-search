@@ -91,6 +91,8 @@ export default function DigitalTwinPage() {
             alert('Microphone access denied. Please allow microphone access in your browser settings.');
           } else if (event.error === 'no-speech') {
             alert('No speech detected. Please try again.');
+          } else if (event.error === 'network') {
+            alert('Network error with speech recognition. If using Brave browser:\n\n1. Click the Shields icon (🛡️) in the address bar\n2. Turn Shields OFF for this site\n3. Refresh the page and try again\n\nAlternatively, use Chrome or Edge for speech recognition.');
           } else if (event.error === 'aborted') {
             console.log('Speech recognition aborted');
           } else {

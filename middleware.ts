@@ -1,26 +1,29 @@
-import { auth } from "@/auth"
-import { NextResponse } from "next/server"
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-export default auth((req) => {
-  const isLoggedIn = !!req.auth
-  const isAuthPage = req.nextUrl.pathname.startsWith('/auth')
-  const isProtectedRoute = req.nextUrl.pathname.startsWith('/digital-twin')
+const isPublicRoute = createRouteMatcher([
+  '/',
+  '/about',
+  '/sign-in(.*)',
+  '/sign-up(.*)',
+  '/api/people(.*)',
+])
 
-  // If trying to access protected route without auth, redirect to signin
-  if (isProtectedRoute && !isLoggedIn) {
-    const signInUrl = new URL('/auth/signin', req.url)
-    signInUrl.searchParams.set('callbackUrl', req.nextUrl.pathname)
-    return NextResponse.redirect(signInUrl)
+const isProtectedRoute = createRouteMatcher([
+  '/digital-twin(.*)',
+  '/profile(.*)',
+])
+
+export default clerkMiddleware(async (auth, request) => {
+  if (isProtectedRoute(request)) {
+    await auth.protect()
   }
-
-  // If logged in and trying to access auth page, redirect to home
-  if (isAuthPage && isLoggedIn) {
-    return NextResponse.redirect(new URL('/', req.url))
-  }
-
-  return NextResponse.next()
 })
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
 }
