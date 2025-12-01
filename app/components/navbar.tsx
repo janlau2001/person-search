@@ -2,11 +2,12 @@
 'use client'
 
 import Link from 'next/link';
-import { Moon, Sun, LogOut, LogIn, User as UserIcon, MessageSquare } from 'lucide-react';
+import { Moon, Sun, LogOut, LogIn, User as UserIcon, MessageSquare, Monitor } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from "@/components/ui/button";
 import { useUser, SignOutButton } from '@clerk/nextjs';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { isAdmin } from '@/lib/admin';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +20,7 @@ import {
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const { user, isLoaded } = useUser();
+  const userIsAdmin = isLoaded && user && isAdmin(user.emailAddresses[0]?.emailAddress);
 
   return (
     <nav className="bg-background shadow-md border-b border-gray-200 dark:border-gray-700">
@@ -47,6 +49,12 @@ export default function Navbar() {
               <Link href="/digital-twin" className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1">
                 <MessageSquare className="h-4 w-4" />
                 Chat
+              </Link>
+            )}
+            {userIsAdmin && (
+              <Link href="/monitoring" className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1">
+                <Monitor className="h-4 w-4" />
+                Monitoring
               </Link>
             )}
             <Button

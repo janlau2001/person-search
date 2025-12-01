@@ -6,6 +6,7 @@ import Navbar from "./components/navbar";
 import Footer from "./components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { DigitalTwinInitializer } from "@/components/digital-twin-initializer";
+import { VisitorTracker } from "@/components/visitor-tracker";
 import { ClerkProvider } from '@clerk/nextjs';
 
 const geistSans = Geist({
@@ -41,6 +42,7 @@ export default function RootLayout({
                 disableTransitionOnChange
               >
             <DigitalTwinInitializer />
+            <VisitorTracker />
             <Navbar />
             <main className="flex-grow">
               {children}
