@@ -1,10 +1,9 @@
 'use client';
 
 import { FloatingChatbot } from '@/components/floating-chatbot';
-import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, Mail, MapPin, GraduationCap, Briefcase, Code, Phone, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, Phone, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import digitalTwinData from '../digitaltwin.json';
 import { motion } from 'framer-motion';
