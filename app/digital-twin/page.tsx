@@ -128,14 +128,14 @@ export default function DigitalTwinPage() {
     // Add welcome message
     setMessages([{
       role: 'assistant',
-      content: "Hi! I'm Jan Laurence's AI Digital Twin. I can answer questions about my background, skills, experience, projects, and career goals. Ask me anything!"
+      content: "Hey there! 👋 I'm Jan's AI buddy - your friendly guide to everything about him! Want to know about his projects? His skills? What he's working on? Just ask! I'm here to chat and I promise to keep things fun and helpful! 😊"
     }]);
   };
 
   const handleClearChat = () => {
     setMessages([{
       role: 'assistant',
-      content: "Hi! I'm Jan Laurence's AI Digital Twin. I can answer questions about my background, skills, experience, projects, and career goals. Ask me anything!"
+      content: "Hey there! 👋 I'm Jan's AI buddy - your friendly guide to everything about him! Want to know about his projects? His skills? What he's working on? Just ask! I'm here to chat and I promise to keep things fun and helpful! 😊"
     }]);
   };
 

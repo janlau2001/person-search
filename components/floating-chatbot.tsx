@@ -30,7 +30,7 @@ export function FloatingChatbot() {
       const userName = user?.firstName || user?.fullName || 'there';
       setMessages([{
         role: 'assistant',
-        content: `Hi ${userName}! I'm Jan's AI assistant. Ask me anything about his experience, skills, or projects!`
+        content: `Hey ${userName}! 👋 I'm Jan's AI buddy - think of me as his friendly assistant! I'd love to chat with you about his work, projects, skills, or anything you're curious about. What would you like to know?`
       }]);
     }
   }, [isOpen, messages.length, isAuthenticated, user]);
