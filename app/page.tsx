@@ -41,38 +41,38 @@ export default function Home() {
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
                 Jan Laurence
               </h1>
-            <h2 className="text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-6">
-              {personal.title}
-            </h2>
-            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-500 mb-8">
-              <MapPin className="h-4 w-4" />
-              <span>{personal.location}</span>
-            </div>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mb-10 leading-relaxed">
-              {personal.summary}
-            </p>
+              <h2 className="text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-6">
+                {personal.title}
+              </h2>
+              <div className="flex items-center gap-2 text-gray-500 dark:text-gray-500 mb-8">
+                <MapPin className="h-4 w-4" />
+                <span>{personal.location}</span>
+              </div>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mb-10 leading-relaxed">
+                {personal.summary}
+              </p>
 
-            {/* Contact Links - Minimal Style */}
-            <div className="flex items-center gap-3">
-              <Link href={personal.contact.github} target="_blank">
-                <Button variant="outline" className="gap-2">
-                  <Github className="h-4 w-4" />
-                  GitHub
-                </Button>
-              </Link>
-              <Link href={personal.contact.linkedin} target="_blank">
-                <Button variant="outline" className="gap-2">
-                  <Linkedin className="h-4 w-4" />
-                  LinkedIn
-                </Button>
-              </Link>
-              <Link href={`mailto:${personal.contact.email.split('/')[0]}`}>
-                <Button variant="outline" className="gap-2">
-                  <Mail className="h-4 w-4" />
-                  Email
-                </Button>
-              </Link>
-            </div>
+              {/* Contact Links - Minimal Style */}
+              <div className="flex items-center gap-3">
+                <Link href={personal.contact.github} target="_blank">
+                  <Button variant="outline" className="gap-2">
+                    <Github className="h-4 w-4" />
+                    GitHub
+                  </Button>
+                </Link>
+                <Link href={personal.contact.linkedin} target="_blank">
+                  <Button variant="outline" className="gap-2">
+                    <Linkedin className="h-4 w-4" />
+                    LinkedIn
+                  </Button>
+                </Link>
+                <Link href={`mailto:${personal.contact.email.split('/')[0]}`}>
+                  <Button variant="outline" className="gap-2">
+                    <Mail className="h-4 w-4" />
+                    Email
+                  </Button>
+                </Link>
+              </div>
             </motion.div>
 
             {/* Profile Picture - Right Side */}
@@ -93,12 +93,9 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
-                  priority
-                />
-              </div>
-            </motion.div>
-          </div>
-        </motion.section>        {/* About Section - Simplified */}
+        </motion.section>
+
+        {/* About Section - Simplified */}
         <motion.section 
           className="mb-24"
           {...fadeIn}
@@ -132,22 +129,27 @@ export default function Home() {
           {...fadeIn}
         >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Experience</h2>
-          <div className="space-y-12">
-            {experience.map((exp, idx) => (
-              <div key={idx} className="border-l-2 border-gray-200 dark:border-gray-800 pl-6">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+          <div className="space-y-6">
+            {Array.isArray(experience) && experience.map((exp: Record<string, string | string[]>, idx: number) => (
+              <div
+                key={idx}
+                className="border border-gray-200 dark:border-gray-800 rounded-lg p-6"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{exp.title}</h3>
-                  <span className="text-sm text-gray-500 dark:text-gray-500">{exp.duration}</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">{exp.duration}</span>
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 mb-3">{exp.company}</p>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">{exp.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {exp.technical_skills_used.map((skill, sidx) => (
-                    <Badge key={sidx} variant="outline" className="text-xs border-gray-300 dark:border-gray-700">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
+                <h4 className="text-lg text-gray-700 dark:text-gray-300 mb-3">{exp.company}</h4>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{exp.description}</p>
+                {exp.skills_used && (
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {exp.skills_used.map((skill: string, tidx: number) => (
+                      <Badge key={tidx} variant="secondary" className="text-xs bg-gray-100 dark:bg-gray-800 border-0">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -161,19 +163,13 @@ export default function Home() {
           {...fadeIn}
         >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Education</h2>
-          <div className="border-l-2 border-gray-200 dark:border-gray-800 pl-6">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{education.degree}</h3>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">{education.university}</p>
-            <p className="text-sm text-gray-500 dark:text-gray-500 mb-6">Expected Graduation: {education.graduation_year}</p>
-            <div>
-              <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Relevant Coursework</h4>
-              <div className="flex flex-wrap gap-2">
-                {education.relevant_coursework.map((course, idx) => (
-                  <Badge key={idx} variant="outline" className="text-xs border-gray-300 dark:border-gray-700">
-                    {typeof course === 'string' ? course : course.course}
-                  </Badge>
-                ))}
+          <div className="space-y-6">
+            <div className="border border-gray-200 dark:border-gray-800 rounded-lg p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{education.degree}</h3>
+                <span className="text-sm text-gray-500 dark:text-gray-400">{education.graduation_year}</span>
               </div>
+              <h4 className="text-lg text-gray-700 dark:text-gray-300">{education.university}</h4>
             </div>
           </div>
         </motion.section>
@@ -186,40 +182,26 @@ export default function Home() {
           {...fadeIn}
         >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Skills</h2>
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Languages</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {skills.programming_languages.map((lang, idx) => (
-                  <div key={idx}>
-                    <p className="font-medium text-gray-900 dark:text-white">{lang.language}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-500">{lang.proficiency}</p>
+          <div className="space-y-6">
+            {Object.entries(skills).map(([category, skillList]) => {
+              if (Array.isArray(skillList)) {
+                return (
+                  <div key={category}>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 capitalize">
+                      {category.replace('_', ' ')}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {skillList.map((skill: string, idx: number) => (
+                        <Badge key={idx} variant="secondary" className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-0">
+                          {skill}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Technologies</h3>
-              <div className="flex flex-wrap gap-2">
-                {(skills.frameworks_libraries || []).map((tool: string | { name: string }, idx: number) => (
-                  <Badge key={idx} variant="outline" className="border-gray-300 dark:border-gray-700">
-                    {typeof tool === 'string' ? tool : tool.name}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Databases</h3>
-              <div className="flex flex-wrap gap-2">
-                {skills.databases.map((db: string | { name: string }, idx: number) => (
-                  <Badge key={idx} variant="outline" className="border-gray-300 dark:border-gray-700">
-                    {typeof db === 'string' ? db : db.name}
-                  </Badge>
-                ))}
-              </div>
-            </div>
+                );
+              }
+              return null;
+            })}
           </div>
         </motion.section>
 
