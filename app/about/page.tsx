@@ -114,6 +114,8 @@ export default function AboutPage() {
           </div>
         </motion.section>
 
+        <hr className="border-t border-gray-200 dark:border-gray-800 mb-24" />
+
         {/* Why Work With Me */}
         <motion.section 
           className="mb-24"

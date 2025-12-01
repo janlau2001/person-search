@@ -98,6 +98,8 @@ export default function Home() {
           </div>
         </motion.section>
 
+        <hr className="border-t border-gray-200 dark:border-gray-800 mb-24" />
+
         {/* Experience */}
         <motion.section 
           className="mb-24"
@@ -125,6 +127,8 @@ export default function Home() {
           </div>
         </motion.section>
 
+        <hr className="border-t border-gray-200 dark:border-gray-800 mb-24" />
+
         {/* Education */}
         <motion.section 
           className="mb-24"
@@ -147,6 +151,8 @@ export default function Home() {
             </div>
           </div>
         </motion.section>
+
+        <hr className="border-t border-gray-200 dark:border-gray-800 mb-24" />
 
         {/* Skills */}
         <motion.section 
@@ -191,6 +197,8 @@ export default function Home() {
           </div>
         </motion.section>
 
+        <hr className="border-t border-gray-200 dark:border-gray-800 mb-24" />
+
         {/* Projects */}
         <motion.section 
           className="mb-24"
@@ -225,6 +233,8 @@ export default function Home() {
             ))}
           </div>
         </motion.section>
+
+        <hr className="border-t border-gray-200 dark:border-gray-800 mb-24" />
 
         {/* Contact Section - Minimal */}
         <motion.section 
