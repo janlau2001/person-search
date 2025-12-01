@@ -82,12 +82,13 @@ export default function MonitoringPage() {
     return `${Math.floor(seconds / 86400)}d ago`;
   };
 
-  if (!isLoaded || loading) {
+  // Check authentication first - block unauthorized users immediately
+  if (!isLoaded) {
     return (
       <div className="min-h-screen bg-white dark:bg-gray-950 flex items-center justify-center">
         <div className="text-center">
           <RefreshCw className="h-8 w-8 animate-spin text-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-400">Loading monitoring data...</p>
+          <p className="text-gray-600 dark:text-gray-400">Loading...</p>
         </div>
       </div>
     );
@@ -110,6 +111,18 @@ export default function MonitoringPage() {
             </Link>
           </div>
         </Card>
+      </div>
+    );
+  }
+
+  // Show loading state only for authenticated admin users
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white dark:bg-gray-950 flex items-center justify-center">
+        <div className="text-center">
+          <RefreshCw className="h-8 w-8 animate-spin text-blue-600 mx-auto mb-4" />
+          <p className="text-gray-600 dark:text-gray-400">Loading monitoring data...</p>
+        </div>
       </div>
     );
   }
