@@ -1,8 +1,8 @@
 {
   "_metadata": {
     "version": "2.0",
-    "last_updated": "2025-11-18",
-    "total_projects": 5,
+    "last_updated": "2025-12-01",
+    "total_projects": 3,
     "years_of_coding": 3,
     "total_technologies": 15,
     "interview_ready": true
@@ -193,118 +193,56 @@
     {
       "metadata": {
         "category": "projects",
-        "keywords": ["e-commerce", "full-stack", "Laravel", "shopping cart", "payment", "CRUD"],
+        "keywords": ["capstone", "club management", "decision support", "academic", "BSIT", "full-stack"],
         "complexity": "high",
-        "status": "completed"
+        "status": "in-progress"
       },
-      "name": "E-Commerce Web Application",
-      "tagline": "Full-featured online shopping platform with secure payment processing",
-      "description": "A comprehensive e-commerce platform featuring product catalog, shopping cart functionality, secure payment integration, order management, and admin dashboard. Built to handle real-world e-commerce operations with role-based access control.",
+      "name": "Club and Academic Organization Management System with Decision Support",
+      "tagline": "Comprehensive management platform for student organizations with intelligent decision support",
+      "description": "A full-stack web application designed to manage club activities, membership, events, and finances with an integrated decision support system. Currently being developed as the capstone project for BSIT at St. Paul University Philippines.",
       "detailed_description_star": {
-        "situation": "Recognized the need for local businesses to establish online presence but existing solutions were expensive. Wanted to create an affordable, customizable e-commerce platform.",
-        "task": "Develop a full-stack e-commerce application with complete shopping experience from product browsing to checkout, including both customer-facing store and admin management panel.",
-        "action": "Architected a MySQL database with normalized schema for products, users, orders, and transactions. Implemented RESTful API using Laravel for backend operations. Created responsive frontend with dynamic shopping cart, product filtering, and search functionality. Integrated secure payment gateway and email notifications. Built comprehensive admin dashboard for inventory management, order processing, and sales analytics.",
-        "result": "Successfully deployed a fully functional e-commerce platform capable of handling 100+ concurrent users. Implemented 20+ features including wishlist, reviews, order tracking, and coupon system. Project demonstrates production-ready code quality and scalability."
+        "situation": "Student organizations and academic clubs face challenges in managing memberships, tracking activities, coordinating events, and making data-driven decisions. Manual processes lead to inefficiency and lack of insights for organizational planning.",
+        "task": "Design and develop a comprehensive management system that not only handles day-to-day operations of clubs but also provides decision support features to help leaders make informed decisions based on data analytics and trends.",
+        "action": "Currently designing the system architecture with a focus on scalability and user experience. Planning features include member management with role-based access, event planning and attendance tracking, financial management and budget allocation, communication tools for announcements and messaging, and analytics dashboard for decision support with data visualization, attendance trends, and financial reports.",
+        "result": "Project is currently in development as the capstone requirement for BSIT degree. Upon completion, the system will provide clubs with a centralized platform for operations and data-driven insights for better organizational management."
       },
-      "technologies": ["Laravel 10", "PHP 8", "MySQL", "HTML5", "CSS3", "JavaScript ES6", "Bootstrap 5", "AJAX", "REST API"],
-      "role": "Full-Stack Developer & Architect",
+      "technologies": ["Laravel", "PHP", "MySQL", "HTML5", "CSS3", "JavaScript", "Bootstrap", "Chart.js", "REST API"],
+      "role": "Full-Stack Developer & Project Lead",
       "features": [
-        "User authentication and authorization (customers & admin)",
-        "Product catalog with categories, filtering, and search",
-        "Shopping cart with real-time price calculation",
-        "Secure checkout with payment gateway integration",
-        "Order management and tracking system",
-        "Admin dashboard with sales analytics and charts",
-        "Product inventory management (CRUD operations)",
-        "Email notifications for orders and updates",
-        "User reviews and ratings system",
-        "Wishlist and favorites functionality",
-        "Responsive design for mobile and desktop"
+        "Member management with role-based permissions",
+        "Event creation, scheduling, and RSVP system",
+        "Attendance tracking and reporting",
+        "Financial management and budget tracking",
+        "Announcement and communication system",
+        "Document and resource repository",
+        "Analytics dashboard with data visualizations",
+        "Decision support reports and insights",
+        "Activity logs and audit trails",
+        "Multi-club support with isolated data"
       ],
       "technical_highlights": [
-        "Implemented MVC architecture for code organization",
-        "Used Eloquent ORM for database operations with optimized queries",
-        "Applied middleware for authentication and authorization",
-        "Integrated Stripe API for secure payment processing",
-        "Implemented CSRF protection and input validation",
-        "Used AJAX for seamless user experience without page reloads"
+        "Implementing MVC architecture with Laravel framework",
+        "Designing normalized database schema for scalability",
+        "Creating RESTful API for future mobile integration",
+        "Building interactive charts using Chart.js for analytics",
+        "Implementing secure authentication and authorization",
+        "Developing decision support algorithms for recommendations"
       ],
       "achievements": {
-        "features_count": "20+ features",
-        "database_tables": "12 tables",
-        "api_endpoints": "30+ endpoints",
-        "concurrent_users": "100+ users supported",
-        "page_load_time": "<2 seconds",
-        "code_lines": "8000+ lines"
+        "status": "In development - Capstone project for BSIT",
+        "expected_features": "20+ core features",
+        "database_design": "15+ interconnected tables",
+        "project_timeline": "Full academic year development cycle"
       },
-      "github_url": "https://github.com/janlau2001/ecommerce-project",
-      "live_demo": "Available on request",
-      "challenges_overcome": [
-        "Learned to handle complex many-to-many database relationships between products, orders, and users",
-        "Implemented secure authentication with password hashing and session management",
-        "Solved shopping cart persistence across sessions using cookies and database storage",
-        "Optimized database queries to prevent N+1 problems using eager loading",
-        "Handled payment gateway integration and webhook processing for order confirmation"
+      "github_url": "https://github.com/janlau2001/club-management-system",
+      "challenges_addressing": [
+        "Designing complex database relationships for clubs, members, events, and finances",
+        "Implementing analytics and decision support features with meaningful insights",
+        "Creating intuitive user interface for non-technical club officers",
+        "Ensuring data security and privacy across multiple organizations",
+        "Building scalable architecture to support multiple clubs simultaneously"
       ],
-      "lessons_learned": "This project taught me the importance of proper system architecture and database design. I learned how to handle complex business logic, implement secure payment processing, and create intuitive user experiences. The experience deepened my understanding of full-stack development and prepared me for real-world e-commerce challenges."
-    },
-    {
-      "metadata": {
-        "category": "projects",
-        "keywords": ["task management", "collaboration", "real-time", "JavaScript", "team productivity"],
-        "complexity": "high",
-        "status": "completed"
-      },
-      "name": "Task Management System",
-      "tagline": "Collaborative project management tool with real-time updates",
-      "description": "A web-based task management application designed for team collaboration featuring real-time task updates, priority management, deadline tracking, and team communication tools.",
-      "detailed_description_star": {
-        "situation": "Teams often struggle with task coordination and project visibility. Wanted to create a simple yet powerful tool for managing tasks and improving team productivity.",
-        "task": "Build a collaborative task management system that allows teams to create, assign, track, and complete tasks with real-time synchronization across all team members.",
-        "action": "Designed a relational database schema to handle projects, tasks, users, and assignments. Developed backend API using PHP and MySQL for task CRUD operations. Implemented real-time update mechanism using AJAX polling for instant task status synchronization. Created intuitive drag-and-drop interface for task organization. Added filtering by priority, status, assigned user, and deadline. Implemented notification system for task assignments and deadlines.",
-        "result": "Delivered a functional task management platform successfully used by 3 teams (30+ users) for coordinating projects. System handles 500+ tasks with real-time updates happening within 2 seconds. Features comprehensive task tracking with 95% user satisfaction."
-      },
-      "technologies": ["JavaScript", "HTML5", "CSS3", "PHP", "MySQL", "jQuery", "AJAX", "JSON"],
-      "role": "Lead Developer & UI Designer",
-      "features": [
-        "Project and task creation with rich text descriptions",
-        "Real-time task updates synchronized across users",
-        "Priority levels (High, Medium, Low) with color coding",
-        "Task assignment to team members",
-        "Deadline tracking with overdue alerts",
-        "Task status workflow (To Do, In Progress, Review, Done)",
-        "Drag-and-drop task organization",
-        "Activity timeline showing task history",
-        "User dashboard with personal task overview",
-        "Filter and search functionality",
-        "Team member management"
-      ],
-      "technical_highlights": [
-        "Implemented real-time synchronization using AJAX long-polling",
-        "Created RESTful API architecture for task operations",
-        "Used jQuery for DOM manipulation and event handling",
-        "Optimized SQL queries with proper indexing for fast searches",
-        "Implemented responsive design with CSS Grid and Flexbox",
-        "Added client-side validation for better UX"
-      ],
-      "achievements": {
-        "users": "30+ active users",
-        "teams": "3 teams using the system",
-        "tasks_managed": "500+ tasks",
-        "sync_time": "<2 seconds",
-        "update_frequency": "Real-time updates every 3 seconds",
-        "user_satisfaction": "95%"
-      },
-      "github_url": "https://github.com/janlau2001/task-manager",
-      "live_demo": "Available on request",
-      "challenges_overcome": [
-        "Solved real-time synchronization challenges without WebSocket by implementing efficient AJAX polling mechanism",
-        "Optimized database queries to handle concurrent requests from multiple users without performance degradation",
-        "Implemented conflict resolution when multiple users edit the same task simultaneously",
-        "Created intuitive drag-and-drop interface that works smoothly across different browsers",
-        "Handled time zone differences for deadline tracking across distributed teams"
-      ],
-      "lessons_learned": "This project enhanced my understanding of real-time web applications and user experience design. I learned the importance of optimizing database queries for performance, implementing efficient polling mechanisms, and creating intuitive interfaces. The experience taught me how to handle concurrent user actions and maintain data consistency."
+      "lessons_learning": "This capstone project is providing hands-on experience in full-cycle software development from requirements gathering to deployment. Learning to translate real-world organizational needs into technical solutions, implement complex business logic, and create data-driven decision support systems that deliver actionable insights."
     },
     {
       "metadata": {
@@ -404,42 +342,6 @@
         "Designed intuitive UX with Shadcn UI components"
       ],
       "lessons_learned": "Enhanced my TypeScript skills and learned component-driven development. Gained experience with modern React patterns, state management, and building scalable frontend architectures."
-    },
-    {
-      "metadata": {
-        "category": "projects",
-        "keywords": ["student information", "school management", "enrollment", "academic records"],
-        "complexity": "medium",
-        "status": "completed"
-      },
-      "name": "Student Information Management System",
-      "tagline": "Comprehensive school management platform for student records",
-      "description": "A complete student information system for managing enrollment, grades, attendance, and academic records. Designed for educational institutions to streamline administrative processes.",
-      "technologies": ["PHP", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap"],
-      "role": "Full-Stack Developer",
-      "features": [
-        "Student enrollment and registration",
-        "Grade management and report cards",
-        "Attendance tracking system",
-        "Parent and teacher portals",
-        "Course and subject management",
-        "Academic calendar and scheduling",
-        "Report generation (PDF)",
-        "User role management (Admin, Teacher, Student, Parent)"
-      ],
-      "achievements": {
-        "student_capacity": "1000+ student records",
-        "features": "25+ administrative features",
-        "user_roles": "4 different access levels",
-        "reports": "10+ automated report types"
-      },
-      "challenges_overcome": [
-        "Designed complex database schema with 15+ related tables",
-        "Implemented role-based access control for security",
-        "Created automated grading and GPA calculation system",
-        "Built PDF report generation for official documents"
-      ],
-      "lessons_learned": "Deepened understanding of database design, especially handling complex relationships. Learned about role-based access control, report generation, and building systems that meet real-world institutional requirements."
     }
   ],
   
