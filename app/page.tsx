@@ -4,532 +4,267 @@ import { FloatingChatbot } from '@/components/floating-chatbot';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, Mail, MapPin, GraduationCap, Briefcase, Code, Heart, Phone, Facebook, Instagram } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, GraduationCap, Briefcase, Code, Phone, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import digitalTwinData from '../digitaltwin.json';
 import { motion } from 'framer-motion';
 
-const fadeInUp = {
+const fadeIn = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 }
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
+  transition: { duration: 0.6, ease: 'easeOut' }
 };
 
 export default function Home() {
   const { personal, education, experience, skills, projects } = digitalTwinData;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-16 max-w-6xl">
+    <div className="min-h-screen bg-white dark:bg-gray-950">
+      <div className="container mx-auto px-6 py-20 max-w-5xl">
         
-        {/* Hero Section - Redesigned */}
+        {/* Hero Section - Clean & Professional */}
         <motion.section 
-          className="min-h-[90vh] flex flex-col justify-center items-center text-center mb-20"
+          className="mb-32"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.8 }}
         >
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
+            transition={{ delay: 0.2 }}
           >
-            <motion.h1 
-              className="text-5xl md:text-7xl font-light text-gray-800 dark:text-gray-200 mb-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              Hi, I am{' '}
-              <motion.span 
-                className="font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-              >
-                Jan Laurence
-              </motion.span>
-            </motion.h1>
-
-            <motion.p 
-              className="text-2xl md:text-4xl text-gray-700 dark:text-gray-300 mb-6 font-medium"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-            >
+            <p className="text-gray-600 dark:text-gray-400 text-lg mb-3">Hi, I am</p>
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+              Jan Laurence
+            </h1>
+            <h2 className="text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-6">
               {personal.title}
-            </motion.p>
-
-            <motion.div 
-              className="flex items-center justify-center gap-2 text-gray-600 dark:text-gray-400 mb-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
-              <MapPin className="h-5 w-5" />
-              <span className="text-lg">{personal.location}</span>
-            </motion.div>
-
-            <motion.p 
-              className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
-            >
+            </h2>
+            <div className="flex items-center gap-2 text-gray-500 dark:text-gray-500 mb-8">
+              <MapPin className="h-4 w-4" />
+              <span>{personal.location}</span>
+            </div>
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mb-10 leading-relaxed">
               {personal.summary}
-            </motion.p>
+            </p>
 
-            {/* Contact Links */}
-            <motion.div 
-              className="flex items-center justify-center gap-4 flex-wrap"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4 }}
-            >
+            {/* Contact Links - Minimal Style */}
+            <div className="flex items-center gap-3">
               <Link href={personal.contact.github} target="_blank">
-                <Button variant="outline" size="lg" className="group hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300">
-                  <Github className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+                <Button variant="outline" className="gap-2">
+                  <Github className="h-4 w-4" />
                   GitHub
                 </Button>
               </Link>
               <Link href={personal.contact.linkedin} target="_blank">
-                <Button variant="outline" size="lg" className="group hover:bg-blue-600 hover:text-white transition-all duration-300">
-                  <Linkedin className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+                <Button variant="outline" className="gap-2">
+                  <Linkedin className="h-4 w-4" />
                   LinkedIn
                 </Button>
               </Link>
               <Link href={`mailto:${personal.contact.email.split('/')[0]}`}>
-                <Button variant="outline" size="lg" className="group hover:bg-red-500 hover:text-white transition-all duration-300">
-                  <Mail className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+                <Button variant="outline" className="gap-2">
+                  <Mail className="h-4 w-4" />
                   Email
                 </Button>
               </Link>
-            </motion.div>
-          </motion.div>
-
-          {/* Scroll indicator */}
-          <motion.div
-            className="absolute bottom-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, y: [0, 10, 0] }}
-            transition={{ delay: 2, repeat: Infinity, duration: 1.5 }}
-          >
-            <div className="flex flex-col items-center gap-2 text-gray-400">
-              <span className="text-sm">Scroll to explore</span>
-              <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-2">
-                <motion.div
-                  className="w-1 h-2 bg-gray-400 rounded-full"
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                />
-              </div>
             </div>
           </motion.div>
         </motion.section>
 
-        {/* About Section */}
+        {/* About Section - Simplified */}
         <motion.section 
-          className="mb-20"
-          {...fadeInUp}
-          transition={{ delay: 0.2 }}
+          className="mb-24"
+          {...fadeIn}
         >
-          <Card className="p-8 md:p-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-2xl border-2 hover:shadow-3xl transition-all duration-300 hover:scale-[1.02]">
-            <h2 className="text-4xl font-bold mb-8 flex items-center gap-3">
-              <motion.div
-                whileHover={{ rotate: 360, scale: 1.2 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Heart className="h-8 w-8 text-red-500" />
-              </motion.div>
-              About Me
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <h3 className="font-semibold text-xl mb-4">Hobbies & Interests</h3>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {personal.personality_traits?.hobbies?.map((hobby, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: idx * 0.1 }}
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <Badge variant="secondary" className="text-sm py-1 px-3">{hobby}</Badge>
-                    </motion.div>
-                  ))}
-                </div>
-                <div className="mt-4 space-y-3 text-base text-gray-700 dark:text-gray-300">
-                  <p className="flex items-center gap-2">
-                    <span className="text-2xl">🍔</span>
-                    <span><strong>Favorite Food:</strong> {personal.personality_traits?.favorite_food}</span>
-                  </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-2xl">🎨</span>
-                    <span><strong>Favorite Color:</strong> {personal.personality_traits?.favorite_color}</span>
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <h3 className="font-semibold text-xl mb-4">Elevator Pitch</h3>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-lg">{personal.elevator_pitch}</p>
-              </motion.div>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">About</h2>
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Background</h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                {personal.elevator_pitch}
+              </p>
             </div>
-          </Card>
-        </motion.section>
-
-        {/* Education */}
-        <motion.section 
-          className="mb-20"
-          {...fadeInUp}
-          transition={{ delay: 0.3 }}
-        >
-          <Card className="p-8 md:p-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-2xl border-2 hover:shadow-3xl transition-all duration-300 hover:scale-[1.02]">
-            <h2 className="text-4xl font-bold mb-8 flex items-center gap-3">
-              <motion.div
-                whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                transition={{ duration: 0.5 }}
-              >
-                <GraduationCap className="h-8 w-8 text-blue-600" />
-              </motion.div>
-              Education
-            </h2>
-            <motion.div
-              whileHover={{ x: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h3 className="text-2xl font-semibold text-blue-600">{education.degree}</h3>
-              <p className="text-xl text-gray-700 dark:text-gray-300 mt-2">{education.university}</p>
-              <p className="text-base text-gray-600 dark:text-gray-400 mb-6">Expected Graduation: {education.graduation_year}</p>
-              <div>
-                <h4 className="font-semibold text-lg mb-4">Relevant Coursework:</h4>
-                <div className="flex flex-wrap gap-3 mt-4">
-                  {education.relevant_coursework.map((course, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ scale: 0, rotate: -180 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{ delay: idx * 0.05, type: "spring" }}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                    >
-                      <Badge variant="outline" className="text-sm py-2 px-4">
-                        {typeof course === 'string' ? course : course.course}
-                      </Badge>
-                    </motion.div>
-                  ))}
-                </div>
+            <div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Interests</h3>
+              <div className="flex flex-wrap gap-2">
+                {personal.personality_traits?.hobbies?.map((hobby, idx) => (
+                  <Badge key={idx} variant="secondary" className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-0">
+                    {hobby}
+                  </Badge>
+                ))}
               </div>
-            </motion.div>
-          </Card>
+            </div>
+          </div>
         </motion.section>
 
         {/* Experience */}
         <motion.section 
-          className="mb-20"
-          {...fadeInUp}
-          transition={{ delay: 0.4 }}
+          className="mb-24"
+          {...fadeIn}
         >
-          <Card className="p-8 md:p-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-2xl border-2 hover:shadow-3xl transition-all duration-300">
-            <h2 className="text-4xl font-bold mb-8 flex items-center gap-3">
-              <motion.div
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Briefcase className="h-8 w-8 text-green-600" />
-              </motion.div>
-              Experience
-            </h2>
-            <motion.div 
-              className="space-y-10"
-              variants={staggerContainer}
-              initial="initial"
-              animate="animate"
-            >
-              {experience.map((exp, idx) => (
-                <motion.div 
-                  key={idx} 
-                  className="border-l-4 border-blue-600 pl-8 relative hover:border-green-600 transition-colors duration-300"
-                  variants={fadeInUp}
-                  whileHover={{ x: 10, scale: 1.02 }}
-                >
-                  <div className="absolute -left-3 top-0 w-6 h-6 bg-blue-600 rounded-full border-4 border-white dark:border-gray-800"></div>
-                  <h3 className="text-2xl font-semibold text-blue-600">{exp.title}</h3>
-                  <p className="text-xl text-gray-700 dark:text-gray-300 mt-1">{exp.company}</p>
-                  <p className="text-base text-gray-600 dark:text-gray-400 mb-4">{exp.duration}</p>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4 text-lg leading-relaxed">{exp.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.technical_skills_used.map((skill, sidx) => (
-                      <motion.div
-                        key={sidx}
-                        whileHover={{ scale: 1.15, rotate: 3 }}
-                      >
-                        <Badge variant="secondary" className="text-sm py-1 px-3">{skill}</Badge>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </Card>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Experience</h2>
+          <div className="space-y-12">
+            {experience.map((exp, idx) => (
+              <div key={idx} className="border-l-2 border-gray-200 dark:border-gray-800 pl-6">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{exp.title}</h3>
+                  <span className="text-sm text-gray-500 dark:text-gray-500">{exp.duration}</span>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-3">{exp.company}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">{exp.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {exp.technical_skills_used.map((skill, sidx) => (
+                    <Badge key={sidx} variant="outline" className="text-xs border-gray-300 dark:border-gray-700">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </motion.section>
 
-        {/* Technical Skills */}
+        {/* Education */}
         <motion.section 
-          className="mb-20"
-          {...fadeInUp}
-          transition={{ delay: 0.5 }}
+          className="mb-24"
+          {...fadeIn}
         >
-          <Card className="p-8 md:p-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-2xl border-2 hover:shadow-3xl transition-all duration-300">
-            <h2 className="text-4xl font-bold mb-8 flex items-center gap-3">
-              <motion.div
-                animate={{ scale: [1, 1.2, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Code className="h-8 w-8 text-purple-600" />
-              </motion.div>
-              Technical Skills
-            </h2>
-            <div className="space-y-8">
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-              >
-                <h3 className="font-semibold text-xl mb-4">Programming Languages</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {skills.programming_languages.map((lang, idx) => (
-                    <motion.div 
-                      key={idx} 
-                      className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-600 p-4 rounded-xl shadow-md hover:shadow-xl transition-all"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                      whileHover={{ scale: 1.08, y: -5 }}
-                    >
-                      <p className="font-bold text-lg text-blue-600">{lang.language}</p>
-                      <p className="text-sm text-gray-700 dark:text-gray-300">{lang.proficiency} • {lang.years} years</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-              >
-                <h3 className="font-semibold text-xl mb-4">Frameworks & Tools</h3>
-                <div className="flex flex-wrap gap-3">
-                  {(skills.frameworks_libraries || []).map((tool: string | { name: string }, idx: number) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: idx * 0.03 }}
-                      whileHover={{ scale: 1.15, rotate: 2 }}
-                    >
-                      <Badge variant="outline" className="text-sm py-2 px-4">
-                        {typeof tool === 'string' ? tool : tool.name}
-                      </Badge>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-              >
-                <h3 className="font-semibold text-xl mb-4">Databases</h3>
-                <div className="flex flex-wrap gap-3">
-                  {skills.databases.map((db: string | { name: string }, idx: number) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: idx * 0.05 }}
-                      whileHover={{ scale: 1.15, rotate: -2 }}
-                    >
-                      <Badge variant="outline" className="text-sm py-2 px-4">
-                        {typeof db === 'string' ? db : db.name}
-                      </Badge>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-              >
-                <h3 className="font-semibold text-xl mb-4">Soft Skills</h3>
-                <div className="flex flex-wrap gap-3">
-                  {skills.soft_skills.map((skill: string | { skill: string }, idx: number) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: idx * 0.04 }}
-                      whileHover={{ scale: 1.15 }}
-                    >
-                      <Badge variant="secondary" className="text-sm py-2 px-4">
-                        {typeof skill === 'string' ? skill : skill.skill}
-                      </Badge>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Education</h2>
+          <div className="border-l-2 border-gray-200 dark:border-gray-800 pl-6">
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{education.degree}</h3>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">{education.university}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-500 mb-6">Expected Graduation: {education.graduation_year}</p>
+            <div>
+              <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Relevant Coursework</h4>
+              <div className="flex flex-wrap gap-2">
+                {education.relevant_coursework.map((course, idx) => (
+                  <Badge key={idx} variant="outline" className="text-xs border-gray-300 dark:border-gray-700">
+                    {typeof course === 'string' ? course : course.course}
+                  </Badge>
+                ))}
+              </div>
             </div>
-          </Card>
+          </div>
+        </motion.section>
+
+        {/* Skills */}
+        <motion.section 
+          className="mb-24"
+          {...fadeIn}
+        >
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Skills</h2>
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Languages</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {skills.programming_languages.map((lang, idx) => (
+                  <div key={idx}>
+                    <p className="font-medium text-gray-900 dark:text-white">{lang.language}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-500">{lang.proficiency}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Technologies</h3>
+              <div className="flex flex-wrap gap-2">
+                {(skills.frameworks_libraries || []).map((tool: string | { name: string }, idx: number) => (
+                  <Badge key={idx} variant="outline" className="border-gray-300 dark:border-gray-700">
+                    {typeof tool === 'string' ? tool : tool.name}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Databases</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.databases.map((db: string | { name: string }, idx: number) => (
+                  <Badge key={idx} variant="outline" className="border-gray-300 dark:border-gray-700">
+                    {typeof db === 'string' ? db : db.name}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
         </motion.section>
 
         {/* Projects */}
         <motion.section 
-          className="mb-20"
-          {...fadeInUp}
-          transition={{ delay: 0.6 }}
+          className="mb-24"
+          {...fadeIn}
         >
-          <Card className="p-8 md:p-10 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-2xl border-2 hover:shadow-3xl transition-all duration-300">
-            <h2 className="text-4xl font-bold mb-8">Featured Projects</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {projects.map((project, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.2 }}
-                  whileHover={{ scale: 1.05, y: -10 }}
-                >
-                  <Card className="p-6 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-700 dark:to-gray-600 shadow-lg h-full hover:shadow-2xl transition-all duration-300">
-                    <h3 className="text-2xl font-semibold mb-3 text-blue-600">{project.name}</h3>
-                    <p className="text-gray-700 dark:text-gray-300 mb-4 text-base leading-relaxed">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech, tidx) => (
-                        <motion.div
-                          key={tidx}
-                          whileHover={{ scale: 1.1 }}
-                        >
-                          <Badge variant="outline" className="text-xs">{tech}</Badge>
-                        </motion.div>
-                      ))}
-                    </div>
-                    <div className="flex gap-3">
-                      {project.github_url && (
-                        <Link href={project.github_url} target="_blank">
-                          <Button variant="outline" size="sm" className="group hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900">
-                            <Github className="h-4 w-4 mr-2 group-hover:scale-110 transition-transform" />
-                            Code
-                          </Button>
-                        </Link>
-                      )}
-                    </div>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </Card>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Projects</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {projects.map((project, idx) => (
+              <div
+                key={idx}
+                className="border border-gray-200 dark:border-gray-800 rounded-lg p-6 hover:border-gray-300 dark:hover:border-gray-700 transition-colors"
+              >
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{project.name}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech, tidx) => (
+                    <Badge key={tidx} variant="secondary" className="text-xs bg-gray-100 dark:bg-gray-800 border-0">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+                {project.github_url && (
+                  <Link href={project.github_url} target="_blank">
+                    <Button variant="ghost" size="sm" className="gap-2 px-0">
+                      <Github className="h-4 w-4" />
+                      View Code
+                      <ExternalLink className="h-3 w-3" />
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            ))}
+          </div>
         </motion.section>
 
-        {/* Contact Me Section */}
+        {/* Contact Section - Minimal */}
         <motion.section 
-          className="mb-20"
-          {...fadeInUp}
-          transition={{ delay: 0.7 }}
+          className="mb-24"
+          {...fadeIn}
         >
-          <Card className="p-8 md:p-10 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-700 shadow-2xl border-2 hover:shadow-3xl transition-all duration-300">
-            <h2 className="text-4xl font-bold mb-8 text-center">Contact Me</h2>
-            <div className="max-w-2xl mx-auto">
-              <motion.div 
-                className="text-center mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <h3 className="text-2xl font-semibold mb-2">Jan Laurence H. Olarte</h3>
-                <p className="text-gray-600 dark:text-gray-300">Full-Stack Developer | Information Technology Student</p>
-              </motion.div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Phone */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
-                >
-                  <Phone className="h-6 w-6 text-blue-600" />
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Phone</p>
-                    <a href="tel:+639360537373" className="font-medium hover:text-blue-600 transition-colors">
-                      +63 936 053 7373
-                    </a>
-                  </div>
-                </motion.div>
-
-                {/* Yahoo Email */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
-                >
-                  <Mail className="h-6 w-6 text-purple-600" />
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Yahoo Mail</p>
-                    <a href="mailto:janlaurenceolarte@yahoo.com" className="font-medium hover:text-purple-600 transition-colors text-sm">
-                      janlaurenceolarte@yahoo.com
-                    </a>
-                  </div>
-                </motion.div>
-
-                {/* Gmail */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
-                >
-                  <Mail className="h-6 w-6 text-red-600" />
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Gmail</p>
-                    <a href="mailto:janlaurenceolarte070101@gmail.com" className="font-medium hover:text-red-600 transition-colors text-sm">
-                      janlaurenceolarte070101@gmail.com
-                    </a>
-                  </div>
-                </motion.div>
-
-                {/* Facebook */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all"
-                >
-                  <Facebook className="h-6 w-6 text-blue-500" />
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Facebook</p>
-                    <a href="https://facebook.com/janlaurence.olarte" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-blue-500 transition-colors">
-                      facebook.com/janlaurence.olarte
-                    </a>
-                  </div>
-                </motion.div>
-
-                {/* Instagram */}
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-center gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all md:col-span-2"
-                >
-                  <Instagram className="h-6 w-6 text-pink-600" />
-                  <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Instagram</p>
-                    <a href="https://instagram.com/janlaurence.olarte" target="_blank" rel="noopener noreferrer" className="font-medium hover:text-pink-600 transition-colors">
-                      @janlaurence.olarte
-                    </a>
-                  </div>
-                </motion.div>
-              </div>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Contact</h2>
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+              <Mail className="h-5 w-5" />
+              <a href="mailto:janlaurenceolarte@yahoo.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                janlaurenceolarte@yahoo.com
+              </a>
             </div>
-          </Card>
+            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+              <Mail className="h-5 w-5" />
+              <a href="mailto:janlaurenceolarte070101@gmail.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                janlaurenceolarte070101@gmail.com
+              </a>
+            </div>
+            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+              <Phone className="h-5 w-5" />
+              <a href="tel:+639360537373" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                +63 936 053 7373
+              </a>
+            </div>
+            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+              <Github className="h-5 w-5" />
+              <a href={personal.contact.github} target="_blank" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                GitHub Profile
+              </a>
+            </div>
+            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+              <Linkedin className="h-5 w-5" />
+              <a href={personal.contact.linkedin} target="_blank" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                LinkedIn Profile
+              </a>
+            </div>
+          </div>
         </motion.section>
 
       </div>
