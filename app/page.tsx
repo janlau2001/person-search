@@ -141,9 +141,9 @@ export default function Home() {
                 </div>
                 <h4 className="text-lg text-gray-700 dark:text-gray-300 mb-3">{exp.company}</h4>
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{exp.description}</p>
-                {exp.skills_used && (
+                {'technical_skills_used' in exp && exp.technical_skills_used && (
                   <div className="flex flex-wrap gap-2 mt-4">
-                    {exp.skills_used.map((skill: string, tidx: number) => (
+                    {exp.technical_skills_used.map((skill: string, tidx: number) => (
                       <Badge key={tidx} variant="secondary" className="text-xs bg-gray-100 dark:bg-gray-800 border-0">
                         {skill}
                       </Badge>
