@@ -3,8 +3,9 @@
 import { FloatingChatbot } from '@/components/floating-chatbot';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, Mail, MapPin, Phone, ExternalLink } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, Phone, ExternalLink, User } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import digitalTwinData from '../digitaltwin.json';
 import { motion } from 'framer-motion';
 
@@ -28,15 +29,41 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <p className="text-gray-600 dark:text-gray-400 text-lg mb-3">Hi, I am</p>
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
-              Jan Laurence
-            </h1>
+          <div className="flex items-start gap-8 md:gap-12">
+            {/* Profile Picture */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="flex-shrink-0"
+            >
+              <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800">
+                {/* Replace /profile.jpg with your actual image path */}
+                <div className="w-full h-full flex items-center justify-center">
+                  <User className="w-20 h-20 text-gray-400" />
+                </div>
+                {/* Uncomment when you have an image:
+                <Image
+                  src="/profile.jpg"
+                  alt="Jan Laurence"
+                  fill
+                  className="object-cover"
+                  priority
+                /> */}
+              </div>
+            </motion.div>
+
+            {/* Text Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex-1"
+            >
+              <p className="text-gray-600 dark:text-gray-400 text-lg mb-3">Hi, I am</p>
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
+                Jan Laurence
+              </h1>
             <h2 className="text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-6">
               {personal.title}
             </h2>
@@ -69,7 +96,8 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.section>
 
         {/* About Section - Simplified */}
@@ -236,42 +264,44 @@ export default function Home() {
 
         <hr className="border-t border-gray-200 dark:border-gray-800 mb-24" />
 
-        {/* Contact Section - Minimal */}
+        {/* Contact Me Section - With Container */}
         <motion.section 
           className="mb-24"
           {...fadeIn}
         >
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Contact</h2>
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
-              <Mail className="h-5 w-5" />
-              <a href="mailto:janlaurenceolarte@yahoo.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">
-                janlaurenceolarte@yahoo.com
-              </a>
-            </div>
-            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
-              <Mail className="h-5 w-5" />
-              <a href="mailto:janlaurenceolarte070101@gmail.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">
-                janlaurenceolarte070101@gmail.com
-              </a>
-            </div>
-            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
-              <Phone className="h-5 w-5" />
-              <a href="tel:+639360537373" className="hover:text-gray-900 dark:hover:text-white transition-colors">
-                +63 936 053 7373
-              </a>
-            </div>
-            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
-              <Github className="h-5 w-5" />
-              <a href={personal.contact.github} target="_blank" className="hover:text-gray-900 dark:hover:text-white transition-colors">
-                GitHub Profile
-              </a>
-            </div>
-            <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
-              <Linkedin className="h-5 w-5" />
-              <a href={personal.contact.linkedin} target="_blank" className="hover:text-gray-900 dark:hover:text-white transition-colors">
-                LinkedIn Profile
-              </a>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Contact Me</h2>
+          <div className="border border-gray-200 dark:border-gray-800 rounded-lg p-8 bg-gray-50 dark:bg-gray-900">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                <Mail className="h-5 w-5 flex-shrink-0" />
+                <a href="mailto:janlaurenceolarte@yahoo.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                  janlaurenceolarte@yahoo.com
+                </a>
+              </div>
+              <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                <Mail className="h-5 w-5 flex-shrink-0" />
+                <a href="mailto:janlaurenceolarte070101@gmail.com" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                  janlaurenceolarte070101@gmail.com
+                </a>
+              </div>
+              <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                <Phone className="h-5 w-5 flex-shrink-0" />
+                <a href="tel:+639360537373" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                  +63 936 053 7373
+                </a>
+              </div>
+              <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                <Github className="h-5 w-5 flex-shrink-0" />
+                <a href={personal.contact.github} target="_blank" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                  GitHub Profile
+                </a>
+              </div>
+              <div className="flex items-center gap-3 text-gray-600 dark:text-gray-400">
+                <Linkedin className="h-5 w-5 flex-shrink-0" />
+                <a href={personal.contact.linkedin} target="_blank" className="hover:text-gray-900 dark:hover:text-white transition-colors">
+                  LinkedIn Profile
+                </a>
+              </div>
             </div>
           </div>
         </motion.section>
