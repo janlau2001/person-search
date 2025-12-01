@@ -192,9 +192,13 @@ export default function Home() {
                     </h3>
                     <div className="flex flex-wrap gap-2">
                       {skillList.map((skill, idx: number) => {
-                        const skillName = typeof skill === 'string' 
-                          ? skill 
-                          : (skill as any).name || (skill as any).language || '';
+                        let skillName = '';
+                        if (typeof skill === 'string') {
+                          skillName = skill;
+                        } else if (typeof skill === 'object' && skill !== null) {
+                          skillName = (skill as Record<string, unknown>).name as string || 
+                                     (skill as Record<string, unknown>).language as string || '';
+                        }
                         return skillName ? (
                           <Badge key={idx} variant="secondary" className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-0">
                             {skillName}
