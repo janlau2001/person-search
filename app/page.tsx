@@ -5,7 +5,6 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Github, Linkedin, Mail, MapPin, Phone, ExternalLink, User } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
 import digitalTwinData from '../digitaltwin.json';
 import { motion } from 'framer-motion';
 
