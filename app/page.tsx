@@ -130,7 +130,7 @@ export default function Home() {
         >
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Experience</h2>
           <div className="space-y-6">
-            {Array.isArray(experience) && experience.map((exp: Record<string, string | string[]>, idx: number) => (
+            {Array.isArray(experience) && experience.map((exp, idx: number) => (
               <div
                 key={idx}
                 className="border border-gray-200 dark:border-gray-800 rounded-lg p-6"
