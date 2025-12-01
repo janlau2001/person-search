@@ -2,7 +2,7 @@
 'use client'
 
 import Link from 'next/link';
-import { Moon, Sun, LogOut, LogIn, User as UserIcon } from 'lucide-react';
+import { Moon, Sun, LogOut, LogIn, User as UserIcon, MessageSquare } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from "@/components/ui/button";
 import { useUser, SignOutButton } from '@clerk/nextjs';
@@ -43,6 +43,12 @@ export default function Navbar() {
             <Link href="/about" className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium">
               About
             </Link>
+            {isLoaded && user && (
+              <Link href="/digital-twin" className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1">
+                <MessageSquare className="h-4 w-4" />
+                Chat
+              </Link>
+            )}
             <Button
               variant="ghost"
               size="icon"
