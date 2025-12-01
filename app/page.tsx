@@ -4,7 +4,7 @@ import { FloatingChatbot } from '@/components/floating-chatbot';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, Mail, MapPin, GraduationCap, Briefcase, Code, Heart, Sparkles, Phone, Facebook, Instagram } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, GraduationCap, Briefcase, Code, Heart, Phone, Facebook, Instagram } from 'lucide-react';
 import Link from 'next/link';
 import digitalTwinData from '../digitaltwin.json';
 import { motion } from 'framer-motion';
@@ -28,89 +28,110 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <div className="container mx-auto px-4 py-12 max-w-6xl">
+      <div className="container mx-auto px-4 py-16 max-w-6xl">
         
-        {/* Hero Section */}
+        {/* Hero Section - Redesigned */}
         <motion.section 
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          className="min-h-[90vh] flex flex-col justify-center items-center text-center mb-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
         >
-          <motion.div 
-            className="mb-6"
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
           >
-            <motion.div
-              className="relative inline-block mb-4"
-              whileHover={{ scale: 1.05 }}
-            >
-              <h1 className="text-6xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                {personal.name}
-              </h1>
-              <motion.div
-                className="absolute -top-4 -right-4"
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <Sparkles className="h-8 w-8 text-yellow-500" />
-              </motion.div>
-            </motion.div>
-            <motion.p 
-              className="text-2xl md:text-3xl text-gray-700 dark:text-gray-300 mb-4 font-medium"
+            <motion.h1 
+              className="text-5xl md:text-7xl font-light text-gray-800 dark:text-gray-200 mb-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              {personal.title}
-            </motion.p>
-            <motion.div 
-              className="flex items-center justify-center gap-2 text-gray-600 dark:text-gray-400 mb-6"
+              Hi, I am{' '}
+              <motion.span 
+                className="font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+              >
+                Jan Laurence
+              </motion.span>
+            </motion.h1>
+
+            <motion.p 
+              className="text-2xl md:text-4xl text-gray-700 dark:text-gray-300 mb-6 font-medium"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.8 }}
+            >
+              {personal.title}
+            </motion.p>
+
+            <motion.div 
+              className="flex items-center justify-center gap-2 text-gray-600 dark:text-gray-400 mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
             >
               <MapPin className="h-5 w-5" />
               <span className="text-lg">{personal.location}</span>
             </motion.div>
+
+            <motion.p 
+              className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+            >
+              {personal.summary}
+            </motion.p>
+
+            {/* Contact Links */}
+            <motion.div 
+              className="flex items-center justify-center gap-4 flex-wrap"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.4 }}
+            >
+              <Link href={personal.contact.github} target="_blank">
+                <Button variant="outline" size="lg" className="group hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300">
+                  <Github className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+                  GitHub
+                </Button>
+              </Link>
+              <Link href={personal.contact.linkedin} target="_blank">
+                <Button variant="outline" size="lg" className="group hover:bg-blue-600 hover:text-white transition-all duration-300">
+                  <Linkedin className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+                  LinkedIn
+                </Button>
+              </Link>
+              <Link href={`mailto:${personal.contact.email.split('/')[0]}`}>
+                <Button variant="outline" size="lg" className="group hover:bg-red-500 hover:text-white transition-all duration-300">
+                  <Mail className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+                  Email
+                </Button>
+              </Link>
+            </motion.div>
           </motion.div>
 
-          <motion.p 
-            className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed"
+          {/* Scroll indicator */}
+          <motion.div
+            className="absolute bottom-8"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            animate={{ opacity: 1, y: [0, 10, 0] }}
+            transition={{ delay: 2, repeat: Infinity, duration: 1.5 }}
           >
-            {personal.summary}
-          </motion.p>
-
-          {/* Contact Links */}
-          <motion.div 
-            className="flex items-center justify-center gap-4 flex-wrap"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            <Link href={personal.contact.github} target="_blank">
-              <Button variant="outline" size="lg" className="group hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-all duration-300">
-                <Github className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-                GitHub
-              </Button>
-            </Link>
-            <Link href={personal.contact.linkedin} target="_blank">
-              <Button variant="outline" size="lg" className="group hover:bg-blue-600 hover:text-white transition-all duration-300">
-                <Linkedin className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-                LinkedIn
-              </Button>
-            </Link>
-            <Link href={`mailto:${personal.contact.email.split('/')[0]}`}>
-              <Button variant="outline" size="lg" className="group hover:bg-red-500 hover:text-white transition-all duration-300">
-                <Mail className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-                Email
-              </Button>
-            </Link>
+            <div className="flex flex-col items-center gap-2 text-gray-400">
+              <span className="text-sm">Scroll to explore</span>
+              <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-2">
+                <motion.div
+                  className="w-1 h-2 bg-gray-400 rounded-full"
+                  animate={{ y: [0, 12, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5 }}
+                />
+              </div>
+            </div>
           </motion.div>
         </motion.section>
 
