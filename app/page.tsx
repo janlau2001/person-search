@@ -191,11 +191,14 @@ export default function Home() {
                       {category.replace('_', ' ')}
                     </h3>
                     <div className="flex flex-wrap gap-2">
-                      {skillList.map((skill: string, idx: number) => (
-                        <Badge key={idx} variant="secondary" className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-0">
-                          {skill}
-                        </Badge>
-                      ))}
+                      {skillList.map((skill, idx: number) => {
+                        const skillName = typeof skill === 'string' ? skill : skill.name || skill.language || '';
+                        return skillName ? (
+                          <Badge key={idx} variant="secondary" className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-0">
+                            {skillName}
+                          </Badge>
+                        ) : null;
+                      })}
                     </div>
                   </div>
                 );
