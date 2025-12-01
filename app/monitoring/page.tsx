@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
+import Link from 'next/link';
 import { isAdmin, hashEmail } from '@/lib/admin';
 import { getMonitoringData } from '@/app/actions/monitoring-actions';
 import { formatDeviceString } from '@/lib/visitor-tracking';
@@ -98,10 +99,15 @@ export default function MonitoringPage() {
         <Card className="p-8 max-w-md">
           <div className="text-center">
             <Shield className="h-16 w-16 text-red-500 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Access Denied</h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Admin Only</h1>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               You don't have permission to access this page.
             </p>
+            <Link href="/">
+              <Button className="w-full">
+                Go back Home
+              </Button>
+            </Link>
           </div>
         </Card>
       </div>
