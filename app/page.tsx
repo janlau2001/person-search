@@ -3,8 +3,9 @@
 import { FloatingChatbot } from '@/components/floating-chatbot';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Github, Linkedin, Mail, MapPin, Phone, ExternalLink, User } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, Phone, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import digitalTwinData from '../digitaltwin.json';
 import { motion } from 'framer-motion';
 
@@ -28,36 +29,13 @@ export default function Home() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="flex items-start gap-8 md:gap-12">
-            {/* Profile Picture */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex-shrink-0"
-            >
-              <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800">
-                {/* Replace /profile.jpg with your actual image path */}
-                <div className="w-full h-full flex items-center justify-center">
-                  <User className="w-20 h-20 text-gray-400" />
-                </div>
-                {/* Uncomment when you have an image:
-                <Image
-                  src="/profile.jpg"
-                  alt="Jan Laurence"
-                  fill
-                  className="object-cover"
-                  priority
-                /> */}
-              </div>
-            </motion.div>
-
+          <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-12">
             {/* Text Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="flex-1"
+              className="flex-1 order-2 md:order-1"
             >
               <p className="text-gray-600 dark:text-gray-400 text-lg mb-3">Hi, I am</p>
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4">
@@ -96,10 +74,31 @@ export default function Home() {
               </Link>
             </div>
             </motion.div>
-          </div>
-        </motion.section>
 
-        {/* About Section - Simplified */}
+            {/* Profile Picture - Right Side */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="flex-shrink-0 order-1 md:order-2 mx-auto md:mx-0"
+            >
+              <div className="relative w-48 h-48 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-800">
+                <Image
+                  src="/profile.JPG"
+                  alt="Jan Laurence"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </motion.div>
+          </div>
+                  priority
+                />
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>        {/* About Section - Simplified */}
         <motion.section 
           className="mb-24"
           {...fadeIn}
