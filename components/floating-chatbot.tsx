@@ -122,13 +122,13 @@ export function FloatingChatbot() {
                     </p>
                   </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-1">
                   {isAuthenticated && (
                     <Link href="/digital-twin">
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="text-white hover:bg-blue-700"
+                        className="text-white hover:bg-blue-700/50"
                         title="Open in full screen"
                       >
                         <Maximize2 className="h-4 w-4" />
@@ -139,7 +139,7 @@ export function FloatingChatbot() {
                     variant="ghost"
                     size="sm"
                     onClick={() => setIsOpen(false)}
-                    className="text-white hover:bg-blue-700"
+                    className="text-white hover:bg-blue-700/50"
                   >
                     <X className="h-4 w-4" />
                   </Button>
